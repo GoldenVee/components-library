@@ -3,7 +3,14 @@
 
 name: code-quality
 
-on: push
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release/*'
+      - 'sn/xx/add-code-quality-workflow'
+  pull_request:
+    branches: '*'
 
 jobs:
   code-quality:
@@ -19,7 +26,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn test
