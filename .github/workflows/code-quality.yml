@@ -1,0 +1,32 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, lint, test and build the source code, across specified versions of Node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: code-quality
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release/*'
+  pull_request:
+    branches: '*'
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [19.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn build
