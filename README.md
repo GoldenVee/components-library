@@ -95,6 +95,68 @@ npx browserslist ">0.2%, not dead, not op_mini all"
 
 The repo includes several development dependencies for Babel. It also includes a standard dependency `@babel/runtime` to share helper functions that would otherwise be duplicated when using the library.
 
+###  Release management
+1. We are using [commitizen](https://github.com/commitizen/cz-cli) to standardize our commits.
+
+2. We are using [standard-version](https://github.com/conventional-changelog/standard-version) for semantic versioning. We have 3 scripts created to achieve the release for our project:
+
+**_Pre release:_** This takes care of build a release candidate that contains all the changes and fixes intended for the release. Test the release candidate to ensure that it works as intended.
+
+```
+yarn prerelease:dry-run
+yarn prerelease
+```
+
+**_Release:_** This takes care of building a release that contains all the changes and fixes intended for the release. Push the release for the next process of creating Github Releases.
+
+`yarn release`
+
+####  Overall steps for versioning that we are looking at in the scripts are as follows:
+
+1.  **SKIPPING Changelog**: By default, prerelease is created with changelogs. But for this project we would use skip creating changelogs and use [Github Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) for generating changelogs and release notes.
+
+2.  **Dry Run**: By default, the lib bumps the version based on the commits in the release. We want to consider running release script with dry run so that we are able to verify the versioning interpreted by the lib. The lib automatically commits the version updates in `package.json`. If you use the script `yarn prerelease:dry-run`, allows you to see what commands would be run, without committing to git or updating files.
+
+3.  **Alpha Release**: The prerelease would be created with apha versioning. eg Based on a last release `v0.0.1`, the new prerelease would be created like this `v0.0.2-alpha.0`. **Note:** We would go ahead and delete the alpha release when the alpha release is tested and final official release is created.
+
+4.  **Commits** To allow signed commits in the release, we have used the `-s` argument in script `yarn release` as it would automatically commit changes.
+
+5.  **Create tag** Lib automatically it creates a tag for the release.
+
+6.  **Push changes and tags** Run command in terminal `git push --follow-tags` to publish
+
+####  Below is the step by step process when working on a release
+
+**Prerelease, dry run**
+1. Create a prerelease with dry run using the script `yarn prerelease:dry-run`.
+
+2. Make sure that semantic version you want for release is correctly interpreted by the lib in terms of `major.minor.patch`.
+
+**Prerelease (Semi Automated)** (Create a alpha prerelease version)
+3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release.
+4. The above script also commits the new version, creates git tag for this release.
+5. Push the commits and tags using the command: `git push --follow-tags`
+6. Put the alpha version of component lib to use and test before the final release.
+
+**Release (Semi Automated)** (Create a release version) 7. Run the script `yarn release`, to create a release from the alpha version. eg Prerelease alpha version `v0.0.2-alpha.0` to official release`v0.0.2` 8. The above script also commits the new version, creates git tag for this release. 9. Push the commits and tags using the command: `git push --follow-tags` 10. Create Github Release
+
+####  Github Release
+
+For this project we are using GitHub Releases, a feature of the GitHub platform that allows developers to publish the software release. The distribution is restricted to be read only access to other repos. 
+
+1. On GitHub.com, navigate to the main page of the repository.
+2. To the right of the list of files, click Releases.
+3. At the top of the page, click Draft a new release.
+4. To chose a tag for the release, select the Choose a tag dropdown menu.
+5. In the "Release title" field, type a title for your release.
+6. Above the description field, click Generate release notes.
+7. Check the generated notes to ensure they include all (and only) the information you want to include.
+8. Move around the PRs to be categorized in feat, fix, doc, refactor, breaking change, etc
+9. PAT (Personal Access Token - Fine grained) needs to be setup to use the release in other projects.
+10. Create the PAT with time limit of 6 months and provide the read only access to `Contents`
+11. Generate PAT & add it to a .npmrc file when deploying the release. (.npmrc will be gitignored)
+12. Try using this release version in one of your projects to ensure the latest changes are available to use. 
+
 ### Troubleshooting and solutions
 
 #### Storybook
