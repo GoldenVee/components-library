@@ -8,6 +8,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-styling',
+    '@storybook/addon-a11y',
     {
       name: '@storybook/addon-postcss',
       options: {
