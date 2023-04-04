@@ -147,7 +147,7 @@ For this project we are using GitHub Releases, a feature of the GitHub platform 
 1. On GitHub.com, navigate to the main page of the repository.
 2. To the right of the list of files, click Releases.
 3. At the top of the page, click Draft a new release.
-4. To chose a tag for the release, select the Choose a tag dropdown menu.
+4. To choose a tag for the release, select the Choose a tag dropdown menu.
 5. In the "Release title" field, type a title for your release.
 6. Above the description field, click Generate release notes.
 7. Check the generated notes to ensure they include all (and only) the information you want to include.
