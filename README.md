@@ -153,7 +153,7 @@ For this project we are using GitHub Releases, a feature of the GitHub platform 
 7. Check the generated notes to ensure they include all (and only) the information you want to include.
 8. Move around the PRs to be categorized in feat, fix, doc, refactor, breaking change, etc
 9. PAT (Personal Access Token - Fine grained) needs to be setup to use the release in other projects.
-10. Create the PAT with time limit of 6 months and provide the read only access to `Contents`
+10. Create the PAT with time limit of 6 months and provide the read only access to `Contents`. When the token expires follow the steps [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token) to generate a new personal access token (fine-grained)
 11. Generate PAT & add it to a .npmrc file when deploying the release. (.npmrc will be gitignored)
 12. Try using this release version in one of your projects to ensure the latest changes are available to use. 
 
