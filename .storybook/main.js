@@ -20,7 +20,6 @@ module.exports = {
   framework: '@storybook/react',
   typescript: {
     reactDocgen: 'react-docgen-typescript-plugin',
-    skipBabel: true,
     check: false,
   },
 };
