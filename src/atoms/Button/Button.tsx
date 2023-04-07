@@ -7,7 +7,7 @@ export interface ButtonProps {
 export type Ref = HTMLButtonElement;
 
 export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
-  ({ children, name, ...props }, ref) => (
+  ({ name, ...props }, ref) => (
     <button
       type="button"
       ref={ref}
