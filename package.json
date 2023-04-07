@@ -8,7 +8,7 @@
   "repository": "git@github.com:whitelabelco/whitelabel-components.git",
   "author": "SimonN <65023744+s994n@users.noreply.github.com>",
   "license": "\"UNLICENSED\"",
-  "private": true,
+  "private": false,
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
