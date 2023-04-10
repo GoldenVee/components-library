@@ -2,11 +2,43 @@
 
 exports[`Button renders as expected 1`] = `
 <div>
-  <button
-    class="bg-yellow-100 rounded-full border-2 p-2"
-    type="button"
+  <div
+    class="sc-eDDNvR bvpcpn"
   >
-    test
-  </button>
+    <button
+      class="sc-beqWaB sc-gueYoa eEsySp bQDNlw"
+      type="button"
+    >
+      test
+    </button>
+    <button
+      class="sc-beqWaB sc-dmqHEX eEsySp hQIzWf"
+      type="button"
+    >
+      test
+    </button>
+    <button
+      class="sc-beqWaB sc-hLseeU eEsySp ipqFhF"
+      type="button"
+    >
+      test
+    </button>
+    <p
+      class="sc-jTrPJq gvqEYd"
+    >
+      Text test
+    </p>
+    <p
+      class="sc-gLDzan cVPCEA"
+    >
+      Subtext test
+    </p>
+    <a
+      class="sc-iAEyYk jmcIIf"
+      href="https://whitelabelco.com/blog"
+    >
+      Link test
+    </a>
+  </div>
 </div>
 `;
