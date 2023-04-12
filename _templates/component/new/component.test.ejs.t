@@ -9,7 +9,11 @@ import { Default } from './<%= name %>.stories'
 
 describe('<%= name %>', () => {
   it('renders as expected', () => {
-    const { container } = render(<Default name="test" />)
+    const { container } = render(
+      <ThemeProvider theme={lightTheme || darkTheme}>
+        <Default name="test" />
+      </ThemeProvider>,
+    )
     expect(container).toMatchSnapshot()
   })
 })
