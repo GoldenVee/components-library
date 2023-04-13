@@ -43,6 +43,7 @@ This module exports all of the components and types defined for the components.
 - Jest DOM - utility package for React Testing Library, providing custom matchers to write reliable tests
 - TS Jest - TypeScript pre-processor to allow Jest to consume and typecheck tests
 - Rollup, and Babel - bundle the application for distribution
+- twin.macro - apply Tailwind CSS styles to styled-components styles
 
 ### Storybook
 
@@ -55,7 +56,7 @@ With Tailwind. The repo uses:
 - tailwind.config.js file at the root. You can use this to customize your Tailwind theme and add overrides. If you want to add your own theme colors and classes you can read more about that on [Tailwind’s theme documentation](https://tailwindcss.com/docs/theme).
 - Tailwaind Just In Time (JIT) mode to make development faster.
 - Purge paths to the config. This is so Tailwind can look through the specified files and only add the css classes that are being used.
-- A `build` script that includes the Tailwind build (when building, a `tailwind.css` file will be included in `dist`).
+- twin.macro uses the Tailwind config (see `babelMacros`, in package.json).
 
 ### Code Style and Quality
 
@@ -79,7 +80,7 @@ Generate component: `yarn generate:component Thing --type atom` (or `pattern` / 
 
 `yarn build`
 The repo uses Babel and Rollup for the build configuration.
-Rollup will create distribution artifacts. Tailwind will also create a minified CSS file when the build is run. TypeScript Declarations are included in the distribution (configured via `tsconfig.build.json`).
+Rollup will create distribution artifacts. TypeScript Declarations are included in the distribution (configured via `tsconfig.build.json`).
 
 #### Babel
 
@@ -95,7 +96,8 @@ npx browserslist ">0.2%, not dead, not op_mini all"
 
 The repo includes several development dependencies for Babel. It also includes a standard dependency `@babel/runtime` to share helper functions that would otherwise be duplicated when using the library.
 
-###  Release management
+### Release management
+
 1. We are using [commitizen](https://github.com/commitizen/cz-cli) to standardize our commits.
 
 2. We are using [standard-version](https://github.com/conventional-changelog/standard-version) for semantic versioning. We have 3 scripts created to achieve the release for our project:
@@ -111,7 +113,7 @@ yarn prerelease
 
 `yarn release`
 
-####  Overall steps for versioning that we are looking at in the scripts are as follows:
+#### Overall steps for versioning that we are looking at in the scripts are as follows:
 
 1.  **SKIPPING Changelog**: By default, prerelease is created with changelogs. But for this project we would use skip creating changelogs and use [Github Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) for generating changelogs and release notes.
 
@@ -125,24 +127,21 @@ yarn prerelease
 
 6.  **Push changes and tags** Run command in terminal `git push --follow-tags` to publish
 
-####  Below is the step by step process when working on a release
+#### Below is the step by step process when working on a release
 
 **Prerelease, dry run**
+
 1. Create a prerelease with dry run using the script `yarn prerelease:dry-run`.
 
 2. Make sure that semantic version you want for release is correctly interpreted by the lib in terms of `major.minor.patch`.
 
-**Prerelease (Semi Automated)** (Create a alpha prerelease version)
-3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release.
-4. The above script also commits the new version, creates git tag for this release.
-5. Push the commits and tags using the command: `git push --follow-tags`
-6. Put the alpha version of component lib to use and test before the final release.
+**Prerelease (Semi Automated)** (Create a alpha prerelease version) 3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release. 4. The above script also commits the new version, creates git tag for this release. 5. Push the commits and tags using the command: `git push --follow-tags` 6. Put the alpha version of component lib to use and test before the final release.
 
 **Release (Semi Automated)** (Create a release version) 7. Run the script `yarn release`, to create a release from the alpha version. eg Prerelease alpha version `v0.0.2-alpha.0` to official release`v0.0.2` 8. The above script also commits the new version, creates git tag for this release. 9. Push the commits and tags using the command: `git push --follow-tags` 10. Create Github Release
 
-####  Github Release
+#### Github Release
 
-For this project we are using GitHub Releases, a feature of the GitHub platform that allows developers to publish the software release. The distribution is restricted to be read only access to other repos. 
+For this project we are using GitHub Releases, a feature of the GitHub platform that allows developers to publish the software release. The distribution is restricted to be read only access to other repos.
 
 1. On GitHub.com, navigate to the main page of the repository.
 2. To the right of the list of files, click Releases.
@@ -155,7 +154,7 @@ For this project we are using GitHub Releases, a feature of the GitHub platform 
 9. PAT (Personal Access Token - Fine grained) needs to be setup to use the release in other projects.
 10. Create the PAT with time limit of 6 months and provide the read only access to `Contents`. When the token expires follow the steps [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token) to generate a new personal access token (fine-grained)
 11. Generate PAT & add it to a .npmrc file when deploying the release. (.npmrc will be gitignored)
-12. Try using this release version in one of your projects to ensure the latest changes are available to use. 
+12. Try using this release version in one of your projects to ensure the latest changes are available to use.
 
 ### Troubleshooting and solutions
 
