@@ -135,7 +135,15 @@ yarn prerelease
 
 2. Make sure that semantic version you want for release is correctly interpreted by the lib in terms of `major.minor.patch`.
 
-**Prerelease (Semi Automated)** (Create a alpha prerelease version) 3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release. 4. The above script also commits the new version, creates git tag for this release. 5. Push the commits and tags using the command: `git push --follow-tags` 6. Put the alpha version of component lib to use and test before the final release.
+**Prerelease (Semi Automated)** (Create a alpha prerelease version)
+
+3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release.
+
+4. The above script also commits the new version, creates git tag for this release.
+
+5. Push the commits and tags using the command: `git push --follow-tags`
+
+6. Put the alpha version of component lib to use and test before the final release.
 
 **Release (Semi Automated)** (Create a release version) 7. Run the script `yarn release`, to create a release from the alpha version. eg Prerelease alpha version `v0.0.2-alpha.0` to official release`v0.0.2` 8. The above script also commits the new version, creates git tag for this release. 9. Push the commits and tags using the command: `git push --follow-tags` 10. Create Github Release
 
