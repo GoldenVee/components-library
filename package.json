@@ -7,7 +7,7 @@
   "types": "dist/typings/index.d.ts",
   "repository": "git@github.com:whitelabelco/whitelabel-components.git",
   "author": "SimonN <65023744+s994n@users.noreply.github.com>",
-  "license": "\"UNLICENSED\"",
+  "license": "UNLICENSED",
   "private": false,
   "peerDependencies": {
     "react": "^18.2.0",
@@ -27,6 +27,7 @@
     "@storybook/addon-interactions": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-styling": "^0.3.2",
     "@storybook/builder-webpack4": "^6.5.16",
     "@storybook/manager-webpack4": "^6.5.16",
     "@storybook/react": "^6.5.16",
@@ -36,6 +37,7 @@
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "autoprefixer": "^10.4.14",
@@ -60,7 +62,7 @@
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-node-externals": "^5.1.2",
     "standard-version": "^9.5.0",
-    "tailwindcss": "^3.2.7",
+    "tailwindcss": "^3.3.1",
     "ts-jest": "^29.0.5",
     "typescript": "^5.0.2"
   },
@@ -77,10 +79,9 @@
     "lint": "eslint src/**/*",
     "lint:fix": "eslint src/**/* --fix",
     "generate:component": "npx hygen component new",
-    "build-tailwind": "npx tailwindcss -o ./dist/tailwind.css --minify",
     "build:js": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "build:types": "tsc -p tsconfig.build.json",
-    "build": "yarn run build:js && yarn run build:types && yarn build-tailwind",
+    "build": "yarn run build:js && yarn run build:types",
     "commit": "cz",
     "prerelease:dry-run": "standard-version --skip.changelog --prerelease alpha --dry-run",
     "prerelease": "standard-version --skip.changelog --prerelease alpha",
@@ -88,7 +89,21 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
+    "@radix-ui/react-toolbar": "^1.0.3",
     "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16"
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/preset-typescript": "^3.0.0",
+    "babel-plugin-macros": "^3.1.0",
+    "babel-plugin-styled-components": "^2.1.1",
+    "babel-plugin-twin": "^1.1.0",
+    "styled-components": "^5.3.9",
+    "twin.macro": "^3.3.0"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components",
+      "styled": "styled-components",
+      "config": "./tailwind.config.js"
+    }
   }
 }

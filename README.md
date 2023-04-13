@@ -43,6 +43,7 @@ This module exports all of the components and types defined for the components.
 - Jest DOM - utility package for React Testing Library, providing custom matchers to write reliable tests
 - TS Jest - TypeScript pre-processor to allow Jest to consume and typecheck tests
 - Rollup, and Babel - bundle the application for distribution
+- twin.macro - apply Tailwind CSS styles to styled-components styles
 
 ### Storybook
 
@@ -55,7 +56,7 @@ With Tailwind. The repo uses:
 - tailwind.config.js file at the root. You can use this to customize your Tailwind theme and add overrides. If you want to add your own theme colors and classes you can read more about that on [Tailwind’s theme documentation](https://tailwindcss.com/docs/theme).
 - Tailwaind Just In Time (JIT) mode to make development faster.
 - Purge paths to the config. This is so Tailwind can look through the specified files and only add the css classes that are being used.
-- A `build` script that includes the Tailwind build (when building, a `tailwind.css` file will be included in `dist`).
+- twin.macro uses the Tailwind config (see `babelMacros`, in package.json).
 
 ### Code Style and Quality
 
@@ -79,7 +80,7 @@ Generate component: `yarn generate:component Thing --type atom` (or `pattern` / 
 
 `yarn build`
 The repo uses Babel and Rollup for the build configuration.
-Rollup will create distribution artifacts. Tailwind will also create a minified CSS file when the build is run. TypeScript Declarations are included in the distribution (configured via `tsconfig.build.json`).
+Rollup will create distribution artifacts. TypeScript Declarations are included in the distribution (configured via `tsconfig.build.json`).
 
 #### Babel
 
@@ -134,7 +135,15 @@ yarn prerelease
 
 2. Make sure that semantic version you want for release is correctly interpreted by the lib in terms of `major.minor.patch`.
 
-**Prerelease (Semi Automated)** (Create a alpha prerelease version) 3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release. 4. The above script also commits the new version, creates git tag for this release. 5. Push the commits and tags using the command: `git push --follow-tags` 6. Put the alpha version of component lib to use and test before the final release.
+**Prerelease (Semi Automated)** (Create a alpha prerelease version)
+
+3. You have determined with dry run what the version looks like. Now you can run the release script `yarn prerelease` to create alpha version to this release.
+
+4. The above script also commits the new version, creates git tag for this release.
+
+5. Push the commits and tags using the command: `git push --follow-tags`
+
+6. Put the alpha version of component lib to use and test before the final release.
 
 **Release (Semi Automated)** (Create a release version) 7. Run the script `yarn release`, to create a release from the alpha version. eg Prerelease alpha version `v0.0.2-alpha.0` to official release`v0.0.2` 8. The above script also commits the new version, creates git tag for this release. 9. Push the commits and tags using the command: `git push --follow-tags` 10. Create Github Release
 
@@ -208,3 +217,7 @@ Replace username with your GitHub username and GITHUB_TOKEN with your Personal A
 #### Storybook
 
 Typescript 5.+ (used by this project) has dropped several methods expected for use by the current stable version of Storybook (6.+), which was preventing Storybook from building. A workaround has been put in place within package.json, as described [here](hipstersmoothie/react-docgen-typescript-plugin#78). This is a work around, which maybe not be applicable soon, if storybook republishes their version to not use @storybook/react-docgen-typescript-plugin.
+
+#### twin.macro
+
+There are [several examples here](https://github.com/ben-rogerson/twin.examples) which may be useful if troubleshooting issues related to twin.macro.
