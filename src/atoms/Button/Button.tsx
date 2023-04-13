@@ -6,7 +6,6 @@ import {
   StyledButtonThree,
   TwButton,
 } from './Button.styles';
-import tw from 'twin.macro';
 
 export interface ButtonProps {
   name: string;
