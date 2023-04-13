@@ -211,7 +211,7 @@ To install your component library in another project, follow these steps:
 
 Replace username with your GitHub username and GITHUB_TOKEN with your Personal Access Token.
 
-2. Type `yarn install @username/whitelabel-comonents` to install your component library.
+2. Type `yarn install @username/whitelabel-components` to install your component library.
 3. Your component library is now installed and ready to use in your project.
 
 ### Troubleshooting and solutions
