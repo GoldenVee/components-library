@@ -4,6 +4,7 @@ import {
   StyledButtonOne,
   StyledButtonTwo,
   StyledButtonThree,
+  TwButton,
 } from './Button.styles';
 
 export interface ButtonProps {
@@ -56,6 +57,7 @@ export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
       <TestText>Text test</TestText>
       <TestSubText>Subtext test</TestSubText>
       <TextLink href={'https://whitelabelco.com/blog'}>Link test</TextLink>
+      <TwButton>This is a twin.macro-styled button</TwButton>
     </CardExample>
   ),
 );
