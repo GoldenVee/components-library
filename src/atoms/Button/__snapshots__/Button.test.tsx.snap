@@ -39,6 +39,11 @@ exports[`Button renders as expected 1`] = `
     >
       Link test
     </a>
+    <button
+      class="Buttonstyles__TwButton-sc-iaqf7v-4 bWciPT"
+    >
+      This is a twin.macro-styled button
+    </button>
   </div>
 </div>
 `;

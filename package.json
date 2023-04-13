@@ -7,7 +7,7 @@
   "types": "dist/typings/index.d.ts",
   "repository": "git@github.com:whitelabelco/whitelabel-components.git",
   "author": "SimonN <65023744+s994n@users.noreply.github.com>",
-  "license": "\"UNLICENSED\"",
+  "license": "UNLICENSED",
   "private": false,
   "peerDependencies": {
     "react": "^18.2.0",

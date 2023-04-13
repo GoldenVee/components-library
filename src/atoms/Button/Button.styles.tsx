@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 const sharedButtonStyling = styled.button`
   padding: 0.75em 1em;
@@ -38,4 +39,8 @@ export const StyledButtonThree = styled(sharedButtonStyling)`
 
   border-radius: ${({ theme }) => theme.borderRadius.large};
   border: 1px ${({ theme }) => theme.colors.disabledBorder} solid;
+`;
+
+export const TwButton = styled.button`
+  ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
 `;
