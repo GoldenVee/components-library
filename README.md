@@ -183,7 +183,8 @@ To use GitHub Registry for your component library, you need to create a Personal
 To configure npm to use GitHub Registry, you need to create an .npmrc file in the root of your project directory. Here's how to do it:
 
 1. Open a terminal and navigate to your project directory.
-2. Type yarn login --registry=https://npm.pkg.github.com and enter your GitHub username and Personal Access Token when prompted.
+2. Type yarn login --registry=https://npm.pkg.github.com and enter your GitHub username and Personal Access Token when prompted - You may only need a username and email. The login information is in Dashlane as a secure note (ask the project lead for access).
+
 3. Type echo "//npm.pkg.github.com/:\_authToken=${GITHUB_TOKEN}" >> .npmrc in your terminal. Replace GITHUB_TOKEN with your Personal Access Token. You will be able to find that information through Dashlane (Ask for access to "WL Component Lib Tokens")
 
 This will configure npm to use GitHub Registry for your project.
@@ -195,6 +196,7 @@ To publish your component library to GitHub Registry, follow these steps:
 1. Type `yarn publish` in your terminal to publish your package to GitHub Registry.
 2. Increments the version field in your package.json file to a new version number & also commit on success.
 3. Your component library is now published and available on GitHub Registry.
+   Note: If asked for a password during publishing, you may take another approach (see Troubleshooting section)
 
 ##### Installing Component Library
 
@@ -221,3 +223,9 @@ Typescript 5.+ (used by this project) has dropped several methods expected for u
 #### twin.macro
 
 There are [several examples here](https://github.com/ben-rogerson/twin.examples) which may be useful if troubleshooting issues related to twin.macro.
+
+#### Yarn publish
+
+If asked for an (unknown) password when publishing the component library, you could add the following line to your .npmrc file.
+`@whitelabelco:registry=https://npm.pkg.github.com`
+Provied you also have the authentication token in your .npmrc file as described above, this should allow you to publish to the specified registry.
