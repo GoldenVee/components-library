@@ -79,10 +79,9 @@
     "lint": "eslint src/**/*",
     "lint:fix": "eslint src/**/* --fix",
     "generate:component": "npx hygen component new",
-    "build-tailwind": "npx tailwindcss -o ./dist/tailwind.css --minify",
     "build:js": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "build:types": "tsc -p tsconfig.build.json",
-    "build": "yarn run build:js && yarn run build:types && yarn build-tailwind",
+    "build": "yarn run build:js && yarn run build:types",
     "commit": "cz",
     "prerelease:dry-run": "standard-version --skip.changelog --prerelease alpha --dry-run",
     "prerelease": "standard-version --skip.changelog --prerelease alpha",
@@ -99,5 +98,12 @@
     "babel-plugin-twin": "^1.1.0",
     "styled-components": "^5.3.9",
     "twin.macro": "^3.3.0"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components",
+      "styled": "styled-components",
+      "config": "./tailwind.config.js"
+    }
   }
 }
