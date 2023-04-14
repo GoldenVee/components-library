@@ -1,13 +1,13 @@
 {
   "name": "@whitelabelco/whitelabel-components",
-  "version": "0.0.13-alpha.4",
+  "version": "0.0.13-alpha.5",
   "main": "dist/index.esm.js",
   "files": [
     "dist/**/*",
     "src/**/*",
     "README.md"
   ],
-  "module": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "sideEffects": false,
   "types": "dist/typings/index.d.ts",
   "repository": "git@github.com:whitelabelco/whitelabel-components.git",
