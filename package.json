@@ -1,7 +1,7 @@
 {
   "name": "@whitelabelco/whitelabel-components",
-  "version": "0.0.13-alpha.5",
-  "main": "dist/index.esm.js",
+  "version": "0.0.13-alpha.6",
+  "main": "dist/index.cjs.js",
   "files": [
     "dist/**/*",
     "src/**/*",
