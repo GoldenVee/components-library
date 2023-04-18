@@ -1,46 +1,63 @@
 import styled from 'styled-components';
-import tw from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
+import { ThemeProps } from '../../themes';
+import { ButtonProps } from './Button.props';
 
-const sharedButtonStyling = styled.button`
-  padding: 0.75em 1em;
-  margin: 0.25rem 0.5rem;
+export const StyledButton = styled.button<ButtonProps>(
+  ({ variant, fullWidth, disabled }) => [
+    ({ variant = 'primary' }) => Variants[variant],
+    ({ size = 'medium' }) => Sizes[size],
+    ({ border = 'none' }) => Border[border],
+    ({ borderRadius = 'medium' }) => BorderRadius[borderRadius],
+    ({ boxShadow = 'small' }) => BoxShadow[boxShadow],
+    fullWidth && tw`flex w-full justify-center`,
+    disabled && tw`disabled:opacity-75 bg-blend-saturation`,
+    disabled &&
+      variant === 'transparent' &&
+      tw`disabled:opacity-75 bg-slate-200`,
+    tw`flex flex-row`,
+  ],
+);
 
-  &:hover {
-    transition: all 0.5s ease-in-out;
-  }
-`;
+export const Sizes: TwStyle = {
+  xs: tw`px-2 py-1.5 m-2 text-xs h-min`,
+  small: tw`px-2.5 py-1.5 m-2 text-sm h-min`,
+  medium: tw`px-3.5 py-2 m-2 text-sm h-min`,
+  ml: tw`px-4 py-3 m-2 text-sm h-min`,
+  large: tw`px-5 py-3.5 m-2 text-sm h-min`,
+  xl: tw`px-6 py-4 m-2 text-base h-min`,
+};
 
-export const StyledButtonOne = styled(sharedButtonStyling)`
-  background-color: ${({ theme }) => theme.colors.primaryActive};
-  color: ${({ theme }) => theme.colors.primaryText};
-  border-radius: ${({ theme }) => theme.borderRadius.large};
-  border: 1px ${({ theme }) => theme.colors.primaryBorder} solid;
+type styledThemeProps = {
+  [key: string]: ({ theme }: { theme: ThemeProps }) => string | TwStyle;
+};
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryHover};
-    color: ${({ theme }) => theme.colors.primaryTextHover};
-    border: 1px ${({ theme }) => theme.colors.primaryBorderHover} solid;
-  }
-`;
-export const StyledButtonTwo = styled(sharedButtonStyling)`
-  color: ${({ theme }) => theme.colors.secondaryActive};
-  border-radius: ${({ theme }) => theme.borderRadius.large};
-  border: 1px ${({ theme }) => theme.colors.secondaryActive} solid;
+export const Variants: styledThemeProps = {
+  primary: ({ theme }: { theme: ThemeProps }) => theme.colors.primary,
+  secondary: ({ theme }: { theme: ThemeProps }) => theme.colors.secondary,
+  tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.tertiary,
+  quarterary: ({ theme }: { theme: ThemeProps }) => theme.colors.quaternary,
+  transparent: ({ theme }: { theme: ThemeProps }) => theme.colors.transparent,
+  gradient: ({ theme }: { theme: ThemeProps }) => theme.colors.gradient,
+};
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.secondaryHover};
-    color: ${({ theme }) => theme.colors.secondaryTextHover};
-    border: 1px ${({ theme }) => theme.colors.secondaryHover} solid;
-  }
-`;
-export const StyledButtonThree = styled(sharedButtonStyling)`
-  background-color: ${({ theme }) => theme.colors.disabled};
-  color: ${({ theme }) => theme.colors.disabledText};
+export const Border: styledThemeProps = {
+  none: ({ theme }: { theme: ThemeProps }) => theme.border.noBorder,
+  small: ({ theme }: { theme: ThemeProps }) => theme.border.small,
+  medium: ({ theme }: { theme: ThemeProps }) => theme.border.medium,
+};
 
-  border-radius: ${({ theme }) => theme.borderRadius.large};
-  border: 1px ${({ theme }) => theme.colors.disabledBorder} solid;
-`;
+export const BorderRadius: styledThemeProps = {
+  none: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.none,
+  small: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.small,
+  medium: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.medium,
+  large: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.large,
+  round: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.round,
+};
 
-export const TwButton = styled.button`
-  ${tw`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`}
-`;
+export const BoxShadow: styledThemeProps = {
+  none: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.none,
+  small: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.small,
+  large: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.large,
+  inset: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.inset,
+};

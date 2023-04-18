@@ -3,46 +3,13 @@
 exports[`Button renders as expected 1`] = `
 <div>
   <div
-    class="Button__CardExample-sc-1aocd7z-0 fgjxid"
+    class="Buttonstories__ExampleContainer-sc-1xmc7vr-0 fVPoDu"
   >
     <button
-      class="Buttonstyles__sharedButtonStyling-sc-iaqf7v-0 Buttonstyles__StyledButtonOne-sc-iaqf7v-1 lczdqw ebxeau"
-      type="button"
+      aria-label="test"
+      class="Buttonstyles__StyledButton-sc-iaqf7v-0 cBAPpH"
     >
       test
-    </button>
-    <button
-      class="Buttonstyles__sharedButtonStyling-sc-iaqf7v-0 Buttonstyles__StyledButtonTwo-sc-iaqf7v-2 lczdqw xXUiV"
-      type="button"
-    >
-      test
-    </button>
-    <button
-      class="Buttonstyles__sharedButtonStyling-sc-iaqf7v-0 Buttonstyles__StyledButtonThree-sc-iaqf7v-3 lczdqw igOyGn"
-      type="button"
-    >
-      test
-    </button>
-    <p
-      class="Button__TestText-sc-1aocd7z-1 kwKoEh"
-    >
-      Text test
-    </p>
-    <p
-      class="Button__TestSubText-sc-1aocd7z-2 cyjOwK"
-    >
-      Subtext test
-    </p>
-    <a
-      class="Button__TextLink-sc-1aocd7z-3 bxqyim"
-      href="https://whitelabelco.com/blog"
-    >
-      Link test
-    </a>
-    <button
-      class="Buttonstyles__TwButton-sc-iaqf7v-4 bWciPT"
-    >
-      This is a twin.macro-styled button
     </button>
   </div>
 </div>

@@ -1,65 +1,71 @@
 import React, { forwardRef, ComponentPropsWithoutRef } from 'react';
-import styled from 'styled-components';
-import {
-  StyledButtonOne,
-  StyledButtonTwo,
-  StyledButtonThree,
-  TwButton,
-} from './Button.styles';
+import { StyledButton } from './Button.styles';
+import { ButtonProps } from './Button.props';
+import { BeakerIcon } from '@heroicons/react/24/outline';
 
-export interface ButtonProps {
-  name: string;
-  children?: React.ReactNode;
-}
 export type Ref = HTMLButtonElement;
 
-const CardExample = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius.small};
-  padding: 1.5rem;
-  margin: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.secondaryBackground};
-  max-width: 500px;
-  box-shadow: 4px 2px 16px ${({ theme }) => theme.colors.boxShadow};
-`;
+const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
+  return (
+    <BeakerIcon className="h-5 w-5 mx-1 text-yellow-500 mix-blend-difference" />
+  );
+};
 
-const TestText = styled.p`
-  color: ${({ theme }) => theme.colors.text};
-  margin: 0.25rem 0.5rem;
-`;
-const TestSubText = styled.p`
-  color: ${({ theme }) => theme.colors.subText};
-  margin: 0.25rem 0.5rem;
-`;
-
-const TextLink = styled.a`
-  color: ${({ theme }) => theme.colors.link};
-  text-decoration: none;
-  margin: 0.25rem 0.5rem;
-
-  &:hover {
-    transition: all 0.5s ease-in-out;
-    color: ${({ theme }) => theme.colors.linkHover};
-  }
-`;
+const handleClick = ({ disabled, onClick }: ButtonProps) => {
+  return disabled ? undefined : onClick;
+};
 
 export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
-  ({ children, name, ...props }, ref) => (
-    <CardExample>
-      <StyledButtonOne type="button" ref={ref} {...props}>
+  (
+    {
+      name,
+      size = 'medium',
+      variant = 'primary',
+      border = 'small',
+      borderRadius = 'medium',
+      boxShadow = 'small',
+      fullWidth = false,
+      hasIcon = false,
+      iconPosition = 'leading',
+      mediaSrc = '',
+      mediaAlt = '',
+      disabled = false,
+      children,
+      onClick,
+      ...props
+    }: ButtonProps,
+    ref,
+  ): JSX.Element => {
+    return children ? (
+      <button onClick={handleClick({ disabled, onClick })}>{children}</button>
+    ) : (
+      <StyledButton
+        size={size}
+        variant={variant}
+        border={border}
+        borderRadius={borderRadius}
+        boxShadow={boxShadow}
+        fullWidth={fullWidth}
+        hasIcon={hasIcon}
+        iconPosition={iconPosition}
+        mediaSrc={mediaSrc}
+        mediaAlt={mediaAlt}
+        disabled={disabled}
+        onClick={handleClick({ disabled, onClick })}
+        ref={ref}
+        {...props}
+        aria-label={name}
+      >
+        {hasIcon &&
+          iconPosition === 'leading' &&
+          renderMedia({ mediaSrc, mediaAlt })}
         {name}
-      </StyledButtonOne>
-      <StyledButtonTwo type="button" ref={ref} {...props}>
-        {name}
-      </StyledButtonTwo>
-      <StyledButtonThree type="button" ref={ref} {...props}>
-        {name}
-      </StyledButtonThree>
-      <TestText>Text test</TestText>
-      <TestSubText>Subtext test</TestSubText>
-      <TextLink href={'https://whitelabelco.com/blog'}>Link test</TextLink>
-      <TwButton>This is a twin.macro-styled button</TwButton>
-    </CardExample>
-  ),
+        {hasIcon &&
+          iconPosition === 'trailing' &&
+          renderMedia({ mediaSrc, mediaAlt })}
+      </StyledButton>
+    );
+  },
 );
 
 Button.displayName = 'Button';
