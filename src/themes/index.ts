@@ -3,10 +3,18 @@ import { getDarkTheme } from './default/darktheme';
 import { TwStyle } from 'twin.macro';
 
 export interface ThemeProps {
+  screens: ScreenProps;
   colors: ColorProps;
   border: BorderProps;
   borderRadius: BorderRadiusProps;
   boxShadow: BoxShadowProps;
+}
+export interface ScreenProps {
+  sMobile: TwStyle | string;
+  mobile: TwStyle | string;
+  tablet: TwStyle | string;
+  desktop: TwStyle | string;
+  lgDesktop: TwStyle | string;
 }
 
 export interface ColorProps {

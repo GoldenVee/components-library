@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { Button } from './Button';
 import styled from 'styled-components';
 import { ButtonProps } from './Button.props';
+import starIcon from '../../assets/images/star-icon.png';
 
 const meta: Meta = {
   title: 'atoms/Button',
@@ -98,11 +99,6 @@ const meta: Meta = {
       },
     },
     onClick: { action: 'clicked' },
-    childrenNumber: {
-      description:
-        'If a Button has children, it removes styles to allow for custom styling.',
-      control: { type: 'number', defaultValue: 5 },
-    },
   },
   parameters: {
     controls: { expanded: true },
@@ -189,11 +185,20 @@ const FullWidthTemplate: Story<ButtonProps> = (args) => (
     <Button name="Normal" border="medium" borderRadius="medium" {...args} />
   </ExampleContainer>
 );
-
 const IconButtonTemplate: Story<ButtonProps> = (args) => (
   <ExampleContainer>
-    <Button name="Leading Icon" iconPosition="leading" {...args} />
-    <Button name="Trailing Icon" iconPosition="trailing" {...args} />
+    <Button
+      name="Leading Icon"
+      iconPosition="leading"
+      mediaSrc={starIcon}
+      {...args}
+    />
+    <Button
+      name="Trailing Icon"
+      iconPosition="trailing"
+      mediaSrc={starIcon}
+      {...args}
+    />
   </ExampleContainer>
 );
 

@@ -3,6 +3,13 @@ import { ThemeProps } from '..';
 
 export const getDarkTheme = (): ThemeProps => {
   return {
+    screens: {
+      sMobile: '640px',
+      mobile: '768px',
+      tablet: '1024px',
+      desktop: '1280px',
+      lgDesktop: '1536px',
+    },
     colors: {
       background: tw`bg-slate-950`,
       secondaryBackground: tw`bg-slate-900`,

@@ -1,13 +1,18 @@
 import React, { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { StyledButton } from './Button.styles';
+import { StyledButton, LabelContainer } from './Button.styles';
 import { ButtonProps } from './Button.props';
-import { BeakerIcon } from '@heroicons/react/24/outline';
+import { Media } from '../Media/Media';
+import questionCircleIcon from '../../assets/images/question-circle-icon.png';
 
 export type Ref = HTMLButtonElement;
 
 const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
   return (
-    <BeakerIcon className="h-5 w-5 mx-1 text-yellow-500 mix-blend-difference" />
+    <Media
+      mediaSrc={mediaSrc ? mediaSrc : questionCircleIcon}
+      altText={mediaAlt ? mediaAlt : questionCircleIcon}
+      width="icon"
+    />
   );
 };
 
@@ -36,6 +41,7 @@ export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
     }: ButtonProps,
     ref,
   ): JSX.Element => {
+    console.log(name);
     return children ? (
       <button onClick={handleClick({ disabled, onClick })}>{children}</button>
     ) : (
@@ -54,12 +60,13 @@ export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
         onClick={handleClick({ disabled, onClick })}
         ref={ref}
         {...props}
-        aria-label={name}
+        aria-label={disabled ? `${name} disabled` : name}
+        role="button"
       >
         {hasIcon &&
           iconPosition === 'leading' &&
           renderMedia({ mediaSrc, mediaAlt })}
-        {name}
+        {name && <LabelContainer hasIcon={hasIcon}>{name}</LabelContainer>}
         {hasIcon &&
           iconPosition === 'trailing' &&
           renderMedia({ mediaSrc, mediaAlt })}

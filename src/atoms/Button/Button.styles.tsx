@@ -4,7 +4,7 @@ import { ThemeProps } from '../../themes';
 import { ButtonProps } from './Button.props';
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ variant, fullWidth, disabled }) => [
+  ({ variant, fullWidth, disabled, name }) => [
     ({ variant = 'primary' }) => Variants[variant],
     ({ size = 'medium' }) => Sizes[size],
     ({ border = 'none' }) => Border[border],
@@ -15,9 +15,14 @@ export const StyledButton = styled.button<ButtonProps>(
     disabled &&
       variant === 'transparent' &&
       tw`disabled:opacity-75 bg-slate-200`,
-    tw`flex flex-row`,
+    tw`flex flex-row justify-center items-center`,
   ],
 );
+
+export const LabelContainer = styled.div<ButtonProps>(({ hasIcon }) => [
+  tw`flex w-auto`,
+  hasIcon && tw`mx-2`,
+]);
 
 export const Sizes: TwStyle = {
   xs: tw`px-2 py-1.5 m-2 text-xs h-min`,
