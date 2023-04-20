@@ -25,7 +25,7 @@ const meta: Meta = {
     },
     variant: {
       description:
-        'Color palette of button. Determines background, font, border, and hover colors.',
+        'Color palette of button. Determines background, font, border, and hover colors. Confirm and Destroy are specific utility variants and should be paired with an icon demonstrating clearly what the button is for.',
       control: {
         type: 'radio',
         options: [
@@ -34,6 +34,8 @@ const meta: Meta = {
           'tertiary',
           'quarterary',
           'transparent',
+          'confirm',
+          'destroy',
           'gradient',
         ],
       },
@@ -139,6 +141,13 @@ const VariantsTemplate: Story<ButtonProps> = (args) => (
     <Button name="Quarterary" variant="quarterary" {...args} />
     <Button name="Transparent" variant="transparent" {...args} />
     <Button name="Gradient" variant="gradient" {...args} />
+  </ExampleContainer>
+);
+
+const UtilVariantsTemplate: Story<ButtonProps> = (args) => (
+  <ExampleContainer>
+    <Button name="Destroy" variant="destroy" {...args} />
+    <Button name="Confirm" variant="confirm" {...args} />
   </ExampleContainer>
 );
 
@@ -254,6 +263,11 @@ Sizes.args = {
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {
+  size: 'large',
+};
+
+export const UtilVariants = UtilVariantsTemplate.bind({});
+UtilVariants.args = {
   size: 'large',
 };
 

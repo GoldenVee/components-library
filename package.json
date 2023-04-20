@@ -85,6 +85,7 @@
     "generate:component": "npx hygen component new",
     "build:js": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "build:types": "tsc -p tsconfig.build.json",
+    "build:css": "NODE_ENV=production tailwindcss -o src/tailwind.css -m",
     "build": "yarn run build:js && yarn run build:types",
     "commit": "cz",
     "prerelease:dry-run": "standard-version --skip.changelog --prerelease alpha --dry-run",

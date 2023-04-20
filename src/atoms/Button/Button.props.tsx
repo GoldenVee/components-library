@@ -9,6 +9,8 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
     | 'tertiary'
     | 'quarterary'
     | 'transparent'
+    | 'confirm'
+    | 'destroy'
     | 'gradient';
   border?: 'none' | 'small' | 'medium';
   borderRadius?: 'none' | 'small' | 'medium' | 'large' | 'round';

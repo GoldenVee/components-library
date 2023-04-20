@@ -4,14 +4,14 @@ import { ThemeProps } from '../../themes';
 import { ButtonProps } from './Button.props';
 
 export const StyledButton = styled.button<ButtonProps>(
-  ({ variant, fullWidth, disabled, name }) => [
+  ({ variant, fullWidth, disabled, theme }) => [
     ({ variant = 'primary' }) => Variants[variant],
     ({ size = 'medium' }) => Sizes[size],
     ({ border = 'none' }) => Border[border],
     ({ borderRadius = 'medium' }) => BorderRadius[borderRadius],
     ({ boxShadow = 'small' }) => BoxShadow[boxShadow],
     fullWidth && tw`flex w-full justify-center`,
-    disabled && tw`disabled:opacity-75 bg-blend-saturation`,
+    disabled && theme.colors.disabled,
     disabled &&
       variant === 'transparent' &&
       tw`disabled:opacity-75 bg-slate-200`,
@@ -43,6 +43,8 @@ export const Variants: styledThemeProps = {
   tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.tertiary,
   quarterary: ({ theme }: { theme: ThemeProps }) => theme.colors.quaternary,
   transparent: ({ theme }: { theme: ThemeProps }) => theme.colors.transparent,
+  destroy: ({ theme }: { theme: ThemeProps }) => theme.colors.destroy,
+  confirm: ({ theme }: { theme: ThemeProps }) => theme.colors.confirm,
   gradient: ({ theme }: { theme: ThemeProps }) => theme.colors.gradient,
 };
 

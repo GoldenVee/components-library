@@ -18,14 +18,31 @@ export interface ScreenProps {
 }
 
 export interface ColorProps {
-  background: TwStyle | string;
-  secondaryBackground: TwStyle | string;
+  // bg hierarchy colors
+  bgLvl0: TwStyle | string;
+  bgLvl0Accent: TwStyle | string;
+  bgLvl1: TwStyle | string;
+  bgLvl1Accent: TwStyle | string;
+  bgLvl2: TwStyle | string;
+  bgLvl2Accent: TwStyle | string;
+  bgLvl3: TwStyle | string;
+  bgLvl3Accent: TwStyle | string;
+
+  divider: TwStyle | string;
+
+  // variant colors
   primary: TwStyle | string;
   secondary: TwStyle | string;
   tertiary: TwStyle | string;
   quaternary: TwStyle | string;
   transparent: TwStyle | string;
   gradient: TwStyle | string;
+
+  // utility colors
+  warning: TwStyle | string;
+  destroy: TwStyle | string;
+  confirm: TwStyle | string;
+  disabled: TwStyle | string;
 }
 
 export interface BorderProps {

@@ -11,16 +11,31 @@ export const getLightTheme = (): ThemeProps => {
       lgDesktop: '1536px',
     },
     colors: {
-      background: tw`bg-slate-50`,
-      secondaryBackground: tw`bg-slate-400`,
+      // bg hierarchy
+      bgLvl0: tw`bg-litlvl-50`,
+      bgLvl0Accent: tw`bg-litlvl-100`,
+      bgLvl1: tw`bg-litlvl-200`,
+      bgLvl1Accent: tw`bg-litlvl-300`,
+      bgLvl2: tw`bg-litlvl-400`,
+      bgLvl2Accent: tw`bg-litlvl-500`,
+      bgLvl3: tw`bg-litlvl-600`,
+      bgLvl3Accent: tw`bg-litlvl-700`,
+
+      divider: tw`divide-litlvl-800`,
 
       // behaves like a palette
       primary: tw`bg-indigo-600 text-white hover:bg-indigo-500`,
       secondary: tw`bg-teal-400 text-gray-950 hover:bg-teal-500`,
       tertiary: tw`bg-indigo-200 text-indigo-900 hover:bg-indigo-300`,
       quaternary: tw`bg-teal-300 text-gray-800 hover:bg-teal-400`,
-      transparent: tw`bg-transparent text-black hover:text-indigo-800`,
       gradient: tw`bg-gradient-to-r from-indigo-400 to-indigo-600 hover:from-rose-400 hover:to-indigo-600 text-white`,
+      transparent: tw`bg-transparent text-black hover:text-indigo-800`,
+
+      // utility colors
+      warning: tw`bg-warningLit hover:bg-warningDrk `,
+      destroy: tw`bg-destroyLit text-white hover:bg-destroyDrk`,
+      confirm: tw`bg-confirmLit text-emerald-950 hover:bg-confirmDrk`,
+      disabled: tw`disabled:opacity-75`,
     },
     border: {
       noBorder: tw`border-0`,

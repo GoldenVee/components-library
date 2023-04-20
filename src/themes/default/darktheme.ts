@@ -11,8 +11,23 @@ export const getDarkTheme = (): ThemeProps => {
       lgDesktop: '1536px',
     },
     colors: {
-      background: tw`bg-slate-950`,
-      secondaryBackground: tw`bg-slate-900`,
+      // bg hierarchy
+      bgLvl0: tw`bg-darklvl-800`,
+      bgLvl0Accent: tw`bg-darklvl-700`,
+      bgLvl1: tw`bg-darklvl-600`,
+      bgLvl1Accent: tw`bg-darklvl-500`,
+      bgLvl2: tw`bg-darklvl-400`,
+      bgLvl2Accent: tw`bg-darklvl-300`,
+      bgLvl3: tw`bg-darklvl-200`,
+      bgLvl3Accent: tw`bg-darklvl-100`,
+
+      divider: tw`divide-darklvl-50`,
+
+      // utility colors
+      warning: tw`bg-warningDrk hover:bg-warningLit`,
+      destroy: tw`bg-destroyDrk text-white hover:bg-destroyLit`,
+      confirm: tw`bg-confirmDrk hover:bg-confirmLit`,
+      disabled: tw`disabled:opacity-75`,
 
       // behaves like a palette
       primary: tw`bg-indigo-600 text-white hover:bg-indigo-700`,

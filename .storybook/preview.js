@@ -15,7 +15,7 @@ export const parameters = {
 };
 
 const ThemeBlock = styled.div(
-  ({ theme }) => theme.colors.background,
+  ({ theme }) => theme.colors.bgLvl0,
   tw`w-full h-3/4 h-full m-0 p-4 rounded-xl`,
 );
 
