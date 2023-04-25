@@ -19,7 +19,7 @@ declare module '*.jpg' {
   export = value;
 }
 
-declare module '*.pwebpng' {
+declare module '*.webp' {
   const value: any;
   export = value;
 }
