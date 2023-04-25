@@ -80,7 +80,7 @@
     "test": "yarn run test:ts && yarn run test:jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "lint": "eslint src/**/*",
+    "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/* --fix",
     "generate:component": "npx hygen component new",
     "build:js": "rollup -c rollup.config.js --bundleConfigAsCjs",
