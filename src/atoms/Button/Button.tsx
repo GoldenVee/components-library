@@ -16,10 +16,6 @@ const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
   );
 };
 
-const handleClick = ({ disabled, onClick }: ButtonProps) => {
-  return disabled ? undefined : onClick;
-};
-
 export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
   (
     {
@@ -41,9 +37,8 @@ export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
     }: ButtonProps,
     ref,
   ): JSX.Element => {
-    console.log(name);
     return children ? (
-      <button onClick={handleClick({ disabled, onClick })}>{children}</button>
+      <button onClick={onClick}>{children}</button>
     ) : (
       <StyledButton
         size={size}
@@ -54,10 +49,8 @@ export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
         fullWidth={fullWidth}
         hasIcon={hasIcon}
         iconPosition={iconPosition}
-        mediaSrc={mediaSrc}
-        mediaAlt={mediaAlt}
         disabled={disabled}
-        onClick={handleClick({ disabled, onClick })}
+        onClick={onClick}
         ref={ref}
         {...props}
         aria-label={disabled ? `${name} disabled` : name}
