@@ -35,6 +35,9 @@ module.exports = {
         confirmLit: '#57d275',
         confirmDrk: '#39ad60',
       },
+      lineHeight: {
+        11: '60px',
+      },
     },
   },
   plugins: [],

@@ -4,6 +4,7 @@ import { TwStyle } from 'twin.macro';
 
 export interface ThemeProps {
   screens: ScreenProps;
+  fontFamily: FontFamilyProps;
   colors: ColorProps;
   border: BorderProps;
   borderRadius: BorderRadiusProps;
@@ -15,6 +16,12 @@ export interface ScreenProps {
   tablet: TwStyle | string;
   desktop: TwStyle | string;
   lgDesktop: TwStyle | string;
+}
+
+export interface FontFamilyProps {
+  serif: TwStyle | string;
+  sansSerif: TwStyle | string;
+  monospace: TwStyle | string;
 }
 
 export interface ColorProps {
@@ -43,6 +50,13 @@ export interface ColorProps {
   destroy: TwStyle | string;
   confirm: TwStyle | string;
   disabled: TwStyle | string;
+
+  // text colors
+  contrast: TwStyle | string;
+  base: TwStyle | string;
+  subtle: TwStyle | string;
+  nonessential: TwStyle | string;
+  interactive: TwStyle | string;
 }
 
 export interface BorderProps {

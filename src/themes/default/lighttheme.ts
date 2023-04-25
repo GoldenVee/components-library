@@ -10,6 +10,11 @@ export const getLightTheme = (): ThemeProps => {
       desktop: '1280px',
       lgDesktop: '1536px',
     },
+    fontFamily: {
+      serif: tw`font-sans`,
+      sansSerif: tw`font-serif`,
+      monospace: tw`font-mono`,
+    },
     colors: {
       // bg hierarchy
       bgLvl0: tw`bg-litlvl-50`,
@@ -36,6 +41,13 @@ export const getLightTheme = (): ThemeProps => {
       destroy: tw`bg-destroyLit text-white hover:bg-destroyDrk`,
       confirm: tw`bg-confirmLit text-emerald-950 hover:bg-confirmDrk`,
       disabled: tw`disabled:opacity-75`,
+
+      // Text colors
+      contrast: tw`text-slate-950`,
+      base: tw`text-slate-900`,
+      subtle: tw`text-slate-700`,
+      nonessential: tw`text-slate-500`,
+      interactive: tw`text-blue-600`,
     },
     border: {
       noBorder: tw`border-0`,

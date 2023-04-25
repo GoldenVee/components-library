@@ -10,6 +10,11 @@ export const getDarkTheme = (): ThemeProps => {
       desktop: '1280px',
       lgDesktop: '1536px',
     },
+    fontFamily: {
+      serif: tw`font-sans`,
+      sansSerif: tw`font-serif`,
+      monospace: tw`font-mono`,
+    },
     colors: {
       // bg hierarchy
       bgLvl0: tw`bg-darklvl-800`,
@@ -23,12 +28,6 @@ export const getDarkTheme = (): ThemeProps => {
 
       divider: tw`divide-darklvl-50`,
 
-      // utility colors
-      warning: tw`bg-warningDrk hover:bg-warningLit`,
-      destroy: tw`bg-destroyDrk text-white hover:bg-destroyLit`,
-      confirm: tw`bg-confirmDrk hover:bg-confirmLit`,
-      disabled: tw`disabled:opacity-75`,
-
       // behaves like a palette
       primary: tw`bg-indigo-600 text-white hover:bg-indigo-700`,
       secondary: tw`bg-teal-500 text-gray-950 hover:bg-teal-600`,
@@ -36,6 +35,19 @@ export const getDarkTheme = (): ThemeProps => {
       quaternary: tw`bg-teal-400 text-gray-800 hover:bg-teal-500`,
       transparent: tw`bg-transparent text-white hover:text-indigo-200`,
       gradient: tw`bg-gradient-to-r from-indigo-500 to-indigo-800 hover:from-rose-500 hover:to-indigo-700 text-white`,
+
+      // utility colors
+      warning: tw`bg-warningDrk hover:bg-warningLit`,
+      destroy: tw`bg-destroyDrk text-white hover:bg-destroyLit`,
+      confirm: tw`bg-confirmDrk hover:bg-confirmLit`,
+      disabled: tw`disabled:opacity-75`,
+
+      // text colors
+      contrast: tw`text-slate-50`,
+      base: tw`text-slate-100`,
+      subtle: tw`text-slate-300`,
+      nonessential: tw`text-slate-500`,
+      interactive: tw`text-blue-400`,
     },
     border: {
       noBorder: tw`border-0`,
