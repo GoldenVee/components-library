@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Media renders as expected 1`] = `
+<div>
+  <img
+    alt="placeholder image"
+    class="Mediastyles__StyledMedia-sc-jkb874-0 jdBcDx"
+    role="img"
+    src="https://via.placeholder.com/600x400/364987/ffffff?text=Placeholder"
+    title="test"
+    width="ml"
+  />
+</div>
+`;

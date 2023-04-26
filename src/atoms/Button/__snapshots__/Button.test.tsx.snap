@@ -2,10 +2,20 @@
 
 exports[`Button renders as expected 1`] = `
 <div>
-  <button
-    class="Buttonstyles__StyledButtonOne-sc-iaqf7v-0"
+  <div
+    class="Buttonstories__ExampleContainer-sc-1xmc7vr-0 fVPoDu"
   >
-    This is a test button
-  </button>
+    <button
+      aria-label="test"
+      class="Buttonstyles__StyledButton-sc-iaqf7v-0 gIONrn"
+      role="button"
+    >
+      <div
+        class="Buttonstyles__LabelContainer-sc-iaqf7v-1 BxQFd"
+      >
+        test
+      </div>
+    </button>
+  </div>
 </div>
 `;
