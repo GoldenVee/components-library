@@ -1,48 +1,59 @@
-import {
-  borderWidth,
-  borderRadius,
-  fontSize,
-  fontWeight,
-  spacing,
-  standardColors,
-} from '../../styling/globalStyling';
+import tw from 'twin.macro';
+import { ThemeProps } from '..';
 
-const colors = {
-  background: standardColors.white,
-  secondaryBackground: '#E7E9EB',
+export const getLightTheme = (): ThemeProps => {
+  return {
+    screens: {
+      sMobile: '640px',
+      mobile: '768px',
+      tablet: '1024px',
+      desktop: '1280px',
+      lgDesktop: '1536px',
+    },
+    colors: {
+      // bg hierarchy
+      bgLvl0: tw`bg-litlvl-50`,
+      bgLvl0Accent: tw`bg-litlvl-100`,
+      bgLvl1: tw`bg-litlvl-200`,
+      bgLvl1Accent: tw`bg-litlvl-300`,
+      bgLvl2: tw`bg-litlvl-400`,
+      bgLvl2Accent: tw`bg-litlvl-500`,
+      bgLvl3: tw`bg-litlvl-600`,
+      bgLvl3Accent: tw`bg-litlvl-700`,
 
-  primaryActive: standardColors.white,
-  primaryHover: standardColors.black,
-  primaryText: standardColors.black,
-  primaryTextHover: standardColors.white,
-  primaryBorder: '#1e293b',
-  primaryBorderHover: '#94a3b8',
+      divider: tw`divide-litlvl-800`,
 
-  secondaryActive: '#0369A0',
-  secondaryHover: '#183058',
-  secondaryText: standardColors.white,
-  secondaryTextHover: standardColors.white,
-  secondaryBorder: '#2E4F85',
-  secondaryBorderHover: '#4f46e5',
+      // behaves like a palette
+      primary: tw`bg-indigo-600 text-white hover:bg-indigo-500`,
+      secondary: tw`bg-teal-400 text-gray-950 hover:bg-teal-500`,
+      tertiary: tw`bg-indigo-200 text-indigo-900 hover:bg-indigo-300`,
+      quaternary: tw`bg-teal-300 text-gray-800 hover:bg-teal-400`,
+      gradient: tw`bg-gradient-to-r from-indigo-400 to-indigo-600 hover:from-rose-400 hover:to-indigo-600 text-white`,
+      transparent: tw`bg-transparent text-black hover:text-indigo-800`,
 
-  disabled: '#ABB4BD',
-  disabledText: '#414244',
-  disabledBorder: '#414244',
-
-  text: standardColors.black,
-  subText: '#505D6F',
-  link: '#004CFF',
-  linkHover: '#032167',
-
-  boxShadow: '#A9ABB1',
-};
-
-export const lightTheme = {
-  colors,
-  fontSize,
-  borderWidth,
-  borderRadius,
-  fontWeight,
-  spacing,
-  standardColors,
+      // utility colors
+      warning: tw`bg-warningLit hover:bg-warningDrk `,
+      destroy: tw`bg-destroyLit text-white hover:bg-destroyDrk`,
+      confirm: tw`bg-confirmLit text-emerald-950 hover:bg-confirmDrk`,
+      disabled: tw`disabled:opacity-75`,
+    },
+    border: {
+      noBorder: tw`border-0`,
+      small: tw`ring-inset ring-2 ring-slate-700/[.36] focus:ring-2 focus:ring-slate-300/[.56]`,
+      medium: tw`ring-inset ring-4 ring-slate-700/[.36] focus:ring-2 focus:ring-slate-300/[.56]`,
+    },
+    borderRadius: {
+      none: tw`rounded-none`,
+      small: tw`rounded`,
+      medium: tw`rounded-md`,
+      large: tw`rounded-lg`,
+      round: tw`rounded-full`,
+    },
+    boxShadow: {
+      none: tw`shadow-none shadow-indigo-300`,
+      small: tw`shadow-md shadow-indigo-300`,
+      large: tw`shadow-lg shadow-indigo-300`,
+      inset: tw`shadow-inner shadow-indigo-300`,
+    },
+  };
 };

@@ -1,8 +1,8 @@
 import '../tailwind.css';
 import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme } from '../src/themes';
-import { DecoratorFn } from '@storybook/react';
+import { themes } from '../src/themes';
 import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -14,20 +14,18 @@ export const parameters = {
   },
 };
 
-const ThemeBlock = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-  height: 100vh;
-  width: 100vw;
-  overflow: auto;
-  padding: 1rem;
-`;
+const ThemeBlock = styled.div(
+  ({ theme }) => theme.colors.bgLvl0,
+  tw`w-full h-3/4 h-full m-0 p-4 rounded-xl`,
+);
 
-const withTheme: DecoratorFn = (Story, context) => {
-  const theme = context.parameters.theme || context.globals.theme;
-  const storyTheme = theme === 'dark' ? darkTheme : lightTheme;
+const withTheme = (Story, context) => {
+  const { parameters, globals } = context;
+  const theme = parameters.theme || globals.theme;
+  const selectedTheme = theme === 'dark' ? themes.dark : themes.light;
   return (
-    <ThemeProvider theme={storyTheme}>
-      <ThemeBlock theme={storyTheme}>
+    <ThemeProvider theme={selectedTheme}>
+      <ThemeBlock theme={selectedTheme}>
         <Story />
       </ThemeBlock>
     </ThemeProvider>
@@ -40,10 +38,12 @@ export const globalTypes = {
     description: 'Global theme for components',
     defaultValue: 'light',
     toolbar: {
-      icon: 'circle',
-      items: ['light', 'dark'],
-      title: true,
       dynamicTitle: true,
+      icon: 'circle',
+      items: [
+        { value: 'light', title: 'Light' },
+        { value: 'dark', title: 'Dark' },
+      ],
     },
   },
 };

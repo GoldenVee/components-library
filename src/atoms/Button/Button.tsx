@@ -1,65 +1,71 @@
 import React, { forwardRef, ComponentPropsWithoutRef } from 'react';
-import styled from 'styled-components';
-import {
-  StyledButtonOne,
-  StyledButtonTwo,
-  StyledButtonThree,
-  TwButton,
-} from './Button.styles';
+import { StyledButton, LabelContainer } from './Button.styles';
+import { ButtonProps } from './Button.props';
+import { Media } from '../Media/Media';
+import questionCircleIcon from '../../assets/images/question-circle-icon.png';
 
-export interface ButtonProps {
-  name: string;
-  children?: React.ReactNode;
-}
 export type Ref = HTMLButtonElement;
 
-const CardExample = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius.small};
-  padding: 1.5rem;
-  margin: 1.5rem;
-  background-color: ${({ theme }) => theme.colors.secondaryBackground};
-  max-width: 500px;
-  box-shadow: 4px 2px 16px ${({ theme }) => theme.colors.boxShadow};
-`;
-
-const TestText = styled.p`
-  color: ${({ theme }) => theme.colors.text};
-  margin: 0.25rem 0.5rem;
-`;
-const TestSubText = styled.p`
-  color: ${({ theme }) => theme.colors.subText};
-  margin: 0.25rem 0.5rem;
-`;
-
-const TextLink = styled.a`
-  color: ${({ theme }) => theme.colors.link};
-  text-decoration: none;
-  margin: 0.25rem 0.5rem;
-
-  &:hover {
-    transition: all 0.5s ease-in-out;
-    color: ${({ theme }) => theme.colors.linkHover};
-  }
-`;
+const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
+  return (
+    <Media
+      mediaSrc={mediaSrc ? mediaSrc : questionCircleIcon}
+      altText={mediaAlt ? mediaAlt : questionCircleIcon}
+      width="icon"
+    />
+  );
+};
 
 export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
-  ({ children, name, ...props }, ref) => (
-    <CardExample>
-      <StyledButtonOne type="button" ref={ref} {...props}>
-        {name}
-      </StyledButtonOne>
-      <StyledButtonTwo type="button" ref={ref} {...props}>
-        {name}
-      </StyledButtonTwo>
-      <StyledButtonThree type="button" ref={ref} {...props}>
-        {name}
-      </StyledButtonThree>
-      <TestText>Text test</TestText>
-      <TestSubText>Subtext test</TestSubText>
-      <TextLink href={'https://whitelabelco.com/blog'}>Link test</TextLink>
-      <TwButton>This is a twin.macro-styled button</TwButton>
-    </CardExample>
-  ),
+  (
+    {
+      name,
+      size = 'medium',
+      variant = 'primary',
+      border = 'small',
+      borderRadius = 'medium',
+      boxShadow = 'small',
+      fullWidth = false,
+      hasIcon = false,
+      iconPosition = 'leading',
+      mediaSrc = '',
+      mediaAlt = '',
+      disabled = false,
+      children,
+      onClick,
+      ...props
+    }: ButtonProps,
+    ref,
+  ): JSX.Element => {
+    return children ? (
+      <button onClick={onClick}>{children}</button>
+    ) : (
+      <StyledButton
+        size={size}
+        variant={variant}
+        border={border}
+        borderRadius={borderRadius}
+        boxShadow={boxShadow}
+        fullWidth={fullWidth}
+        hasIcon={hasIcon}
+        iconPosition={iconPosition}
+        disabled={disabled}
+        onClick={onClick}
+        ref={ref}
+        {...props}
+        aria-label={disabled ? `${name} disabled` : name}
+        role="button"
+      >
+        {hasIcon &&
+          iconPosition === 'leading' &&
+          renderMedia({ mediaSrc, mediaAlt })}
+        {name && <LabelContainer hasIcon={hasIcon}>{name}</LabelContainer>}
+        {hasIcon &&
+          iconPosition === 'trailing' &&
+          renderMedia({ mediaSrc, mediaAlt })}
+      </StyledButton>
+    );
+  },
 );
 
 Button.displayName = 'Button';
