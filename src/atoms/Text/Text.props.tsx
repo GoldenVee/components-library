@@ -8,5 +8,6 @@ export interface TextProps {
   stylize?: string;
   align?: string;
   overflow?: string;
+  indent?: string;
   children?: React.ReactNode | React.ReactNode[] | string | '';
 }

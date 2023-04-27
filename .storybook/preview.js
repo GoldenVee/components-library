@@ -16,7 +16,7 @@ export const parameters = {
 
 const ThemeBlock = styled.div(
   ({ theme }) => theme.colors.bgLvl0,
-  tw`w-full h-3/4 h-full m-0 p-4 rounded-xl`,
+  tw`w-full h-fit m-0 p-4 rounded-xl`,
 );
 
 const withTheme = (Story, context) => {

@@ -22,6 +22,21 @@ export interface FontFamilyProps {
   serif: TwStyle | string;
   sansSerif: TwStyle | string;
   monospace: TwStyle | string;
+  primaryHeader: TwStyle | string;
+  secondaryHeader: TwStyle | string;
+  tertiaryHeader: TwStyle | string;
+  quaternaryHeader: TwStyle | string;
+  lead: TwStyle | string;
+  body: TwStyle | string;
+  subtext: TwStyle | string;
+  cambria?: TwStyle | string;
+  georgia?: TwStyle | string;
+  arial?: TwStyle | string;
+  helveticaNeue?: TwStyle | string;
+  roboto?: TwStyle | string;
+  courierNew?: TwStyle | string;
+  menlo?: TwStyle | string;
+  monoco?: TwStyle | string;
 }
 
 export interface ColorProps {

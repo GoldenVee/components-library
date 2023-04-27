@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   mode: 'jit',
   content: ['./src/**/*.{js,jsx,ts,tsx}', './stories/*'],
@@ -37,6 +38,16 @@ module.exports = {
       },
       lineHeight: {
         11: '60px',
+      },
+      fontFamily: {
+        cambria: ['Cambria', 'serif'],
+        georgia: ['Georgia', 'serif'],
+        arial: ['Arial', 'sans-serif'],
+        helveticaNeue: ['Helvetica Neue', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        courierNew: ['Courier New', 'mono'],
+        menlo: ['Menlo', 'mono'],
+        monoco: ['Monoco', 'mono'],
       },
     },
   },

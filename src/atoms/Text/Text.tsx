@@ -6,8 +6,6 @@ const getRole = ({ role }: TextProps) => {
   switch (role) {
     case 'blockquote':
       return 'blockquote';
-    case 'code':
-      return 'code';
     case 'h1':
       return 'h1';
     case 'h2':
@@ -16,6 +14,12 @@ const getRole = ({ role }: TextProps) => {
       return 'h3';
     case 'h4':
       return 'h4';
+    case 'ul':
+      return 'ul';
+    case 'ol':
+      return 'ol';
+    case 'li':
+      return 'li';
     default:
       return 'p';
   }
@@ -31,12 +35,14 @@ export const Text = ({
   stylize,
   align,
   overflow,
+  indent,
   children,
   ...props
 }: TextProps): JSX.Element => {
   return (
     <StyledText
       as={getRole({ role })}
+      role={role ? role : 'p'}
       family={family}
       size={size}
       weight={weight}
@@ -45,6 +51,7 @@ export const Text = ({
       stylize={stylize}
       align={align}
       overflow={overflow}
+      indent={indent}
       {...props}
     >
       {children}

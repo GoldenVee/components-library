@@ -11,9 +11,24 @@ export const getDarkTheme = (): ThemeProps => {
       lgDesktop: '1536px',
     },
     fontFamily: {
-      serif: tw`font-sans`,
-      sansSerif: tw`font-serif`,
+      serif: tw`font-serif`,
+      sansSerif: tw`font-sans`,
       monospace: tw`font-mono`,
+      primaryHeader: tw`font-helveticaNeue`,
+      secondaryHeader: tw`font-georgia`,
+      tertiaryHeader: tw`font-cambria`,
+      quaternaryHeader: tw`font-roboto`,
+      lead: tw`font-arial`,
+      body: tw`font-georgia`,
+      subtext: tw`font-roboto`,
+      cambria: tw`font-cambria`,
+      georgia: tw`font-georgia`,
+      arial: tw`font-arial`,
+      helveticaNeue: tw`font-helveticaNeue`,
+      roboto: tw`font-roboto`,
+      courierNew: tw`font-courierNew`,
+      menlo: tw`font-menlo`,
+      monoco: tw`font-monoco`,
     },
     colors: {
       // bg hierarchy
@@ -43,10 +58,10 @@ export const getDarkTheme = (): ThemeProps => {
       disabled: tw`disabled:opacity-75`,
 
       // text colors
-      contrast: tw`text-slate-50`,
-      base: tw`text-slate-100`,
+      contrast: tw`text-slate-100`,
+      base: tw`text-slate-200`,
       subtle: tw`text-slate-300`,
-      nonessential: tw`text-slate-500`,
+      nonessential: tw`text-slate-400`,
       interactive: tw`text-blue-400`,
     },
     border: {
