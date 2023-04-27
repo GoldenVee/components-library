@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import tw, { TwStyle } from 'twin.macro';
 import { ThemeProps } from '../../themes';
-import { TextProps } from './Text.props';
+import { StyledTextProps } from './Text.props';
 
-const renderColors = ({ color }: TextProps) => {
+const renderColors = ({ color }: StyledTextProps) => {
   switch (color) {
     case 'subtle':
       return ({ theme }: { theme: ThemeProps }) => theme.colors.subtle;
@@ -20,17 +20,23 @@ const renderColors = ({ color }: TextProps) => {
   }
 };
 
-export const StyledText = styled.span<TextProps>(({ allCaps }) => [
-  ({ size, role }) => Sizes[size || role],
-  ({ weight, role }) => Weights[weight || role],
-  ({ family, role }) => FontFamilies[family || role],
-  ({ stylize, role }) => Stylizing[stylize || role],
-  ({ align = 'left' }) => Alignment[align],
-  ({ overflow = 'break' }) => Overflow[overflow],
-  ({ indent, role }) => Indent[indent || role],
+export const StyledText = styled.span<StyledTextProps>(({ allCaps }) => [
+  ({ size }) => Sizes[size],
+  ({ weight }) => Weights[weight],
+  ({ family }) => FontFamilies[family],
+  ({ stylize }) => Stylizing[stylize],
+  ({ align }) => Alignment[align],
+  ({ overflow }) => Overflow[overflow],
+  ({ indent }) => Indent[indent],
   allCaps && tw`uppercase`,
-  ({ color }) => renderColors({ color }),
+  (color) => renderColors(color),
 ]);
+
+export const Alignment: TwStyle = {
+  left: tw`text-start`,
+  right: tw`text-end`,
+  center: tw`text-center`,
+};
 
 export const Sizes: TwStyle = {
   xs: tw`text-xs leading-3`,
@@ -72,8 +78,12 @@ export const Weights: TwStyle = {
   a: tw`font-normal`,
 };
 
-type styledThemeProps = {
-  [key: string]: ({ theme }: { theme: ThemeProps }) => string | TwStyle;
+export type styledThemeProps = {
+  [key: string]: ({
+    theme,
+  }: {
+    theme: ThemeProps;
+  }) => string | TwStyle | undefined;
 };
 
 export const Colors: styledThemeProps = {
@@ -131,12 +141,6 @@ export const Indent: TwStyle = {
   md: tw`indent-6`,
   lg: tw`indent-8`,
   li: tw`indent-1`,
-};
-
-export const Alignment: TwStyle = {
-  left: tw`text-left`,
-  right: tw`text-right`,
-  center: tw`text-center`,
 };
 
 export const Overflow: TwStyle = {

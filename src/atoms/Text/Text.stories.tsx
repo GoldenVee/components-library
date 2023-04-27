@@ -240,57 +240,39 @@ const StylizeTemplate: Story<TextProps> = (args) => {
 const OverflowTemplate: Story<TextProps> = (args) => {
   return (
     <ExampleContainer>
-      <div style={{ width: '500px', marginTop: '16px' }}>
-        <Text
-          family="serif"
-          color="contrast"
-          role="h2"
-          size="base"
-          weight="semibold"
-        >
+      <div style={{ marginTop: '16px', width: '46vw' }}>
+        <Text color="contrast" role="h2" size="base" weight="semibold">
           Truncate:
         </Text>
-        <Text family="sansSerif" color="subtle" overflow="truncate" {...args}>
+        <Text color="subtle" overflow="truncate" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Utenimadminimveniam,quisnostrudexercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </Text>
       </div>
-      <div style={{ width: '500px', marginTop: '16px' }}>
-        <Text
-          family="serif"
-          color="contrast"
-          role="h2"
-          size="base"
-          weight="semibold"
-        >
+      <div style={{ marginTop: '16px', width: '46vw' }}>
+        <Text color="contrast" role="h2" size="base" weight="semibold">
           Break:
         </Text>
-        <Text family="sansSerif" color="subtle" overflow="break" {...args}>
+        <Text color="subtle" overflow="break" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Utenimadminimveniam,quisnostrudexercitation ullamco laboris nisi ut
+          Utenimadminimveniam,quisnostrudexercitationullamcolaborisnisiut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </Text>
       </div>
-      <div style={{ width: '500px', marginTop: '16px' }}>
-        <Text
-          family="serif"
-          color="contrast"
-          role="h2"
-          size="base"
-          weight="semibold"
-        >
+      <div style={{ marginTop: '16px', width: '46vw' }}>
+        <Text color="contrast" role="h2" size="base" weight="semibold">
           Hyphen:
         </Text>
-        <Text family="sansSerif" color="subtle" overflow="hyphen" {...args}>
+        <Text color="subtle" overflow="hyphen" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Utenimadminimveniam,quisnostrudexercitation ullamco laboris nisi ut
+          Utenimadminimveniam,quisnostrudexercitationullamcolaborisnisiut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
@@ -305,7 +287,6 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
     <ExampleContainer>
       <div style={{ marginTop: '24px' }}>
         <Text
-          family="serif"
           color="contrast"
           role="h2"
           size="base"
@@ -314,7 +295,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Left:
         </Text>
-        <Text family="sansSerif" color="subtle" align="left" {...args}>
+        <Text color="subtle" align="left" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -326,7 +307,6 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
       </div>
       <div style={{ marginTop: '56px' }}>
         <Text
-          family="serif"
           color="contrast"
           role="h2"
           size="base"
@@ -335,7 +315,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Center:
         </Text>
-        <Text family="sansSerif" color="subtle" align="center" {...args}>
+        <Text color="subtle" align="center" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -347,7 +327,6 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
       </div>
       <div style={{ marginTop: '56px' }}>
         <Text
-          family="serif"
           color="contrast"
           role="h2"
           size="base"
@@ -356,7 +335,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Right:
         </Text>
-        <Text family="sansSerif" color="subtle" align="right" {...args}>
+        <Text color="subtle" align="right" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -451,27 +430,37 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
 const ListTemplate: Story<TextProps> = (args) => {
   return (
     <ExampleContainer>
-      <Text role="ul" style={{ margin: '0px 0px 32px 0px' }} {...args}>
+      <Text
+        role="ul"
+        color="contrast"
+        style={{ margin: '0px 0px 32px 0px' }}
+        {...args}
+      >
         List Title
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
       </Text>
-      <Text role="ol" style={{ margin: '32px 0px 24px 0px' }} {...args}>
+      <Text
+        role="ol"
+        color="contrast"
+        style={{ margin: '32px 0px 24px 0px' }}
+        {...args}
+      >
         List Title
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" {...args}>
+        <Text role="li" color="subtle" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
       </Text>
@@ -491,10 +480,10 @@ export const Weights = WeightsTemplate.bind({});
 Weights.args = { family: 'helveticaNeue' };
 
 export const Colors = ColorsTemplate.bind({});
-Colors.args = {};
+Colors.args = { align: 'left' };
 
 export const Stylize = StylizeTemplate.bind({});
-Stylize.args = {};
+Stylize.args = { align: 'left' };
 
 export const Overflow = OverflowTemplate.bind({});
 Overflow.args = {};
@@ -509,4 +498,4 @@ export const FontFamExample = FontFamExampleTemplate.bind({});
 FontFamExample.args = {};
 
 export const List = ListTemplate.bind({});
-List.args = { color: 'base' };
+List.args = {};

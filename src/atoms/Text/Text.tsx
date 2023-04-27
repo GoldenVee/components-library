@@ -2,7 +2,7 @@ import React from 'react';
 import { TextProps } from './Text.props';
 import { StyledText } from './Text.styles';
 
-const getRole = ({ role }: TextProps) => {
+const getRole = (role: string) => {
   switch (role) {
     case 'blockquote':
       return 'blockquote';
@@ -27,28 +27,29 @@ const getRole = ({ role }: TextProps) => {
 
 export const Text = ({
   family,
-  role,
+  role = 'p',
   size,
   weight,
-  color,
-  allCaps,
+  color = 'base',
+  allCaps = false,
   stylize,
-  align,
-  overflow,
-  indent,
+  align = 'start',
+  overflow = 'break',
+  indent = 'none',
   children,
   ...props
 }: TextProps): JSX.Element => {
+  console.log(color);
   return (
     <StyledText
-      as={getRole({ role })}
-      role={role ? role : 'p'}
-      family={family}
-      size={size}
-      weight={weight}
-      color={color ? color : 'base'}
+      as={getRole(role)}
+      role={role}
+      family={family ? family : role}
+      size={size ? size : role}
+      weight={weight ? weight : role}
+      color={color}
       allCaps={allCaps}
-      stylize={stylize}
+      stylize={stylize ? stylize : role}
       align={align}
       overflow={overflow}
       indent={indent}
