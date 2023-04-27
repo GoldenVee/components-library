@@ -161,8 +161,58 @@ For this project we are using GitHub Releases, a feature of the GitHub platform 
 8. Move around the PRs to be categorized in feat, fix, doc, refactor, breaking change, etc
 9. PAT (Personal Access Token - Fine grained) needs to be setup to use the release in other projects.
 10. Create the PAT with time limit of 6 months and provide the read only access to `Contents`. When the token expires follow the steps [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-fine-grained-personal-access-token) to generate a new personal access token (fine-grained)
-11. Generate PAT & add it to a .npmrc file when deploying the release. (.npmrc will be gitignored)
+11. Generate PAT & add it to a .npmrc file when deploying the release. (.npmrc will be gitignored).
 12. Try using this release version in one of your projects to ensure the latest changes are available to use.
+
+#### Github Packages
+
+Github Packaging is different from Github Release in terms of process too. As a part of the packaging, we would be using PAT again. PAT is created for this project and the release manager would be incharge of this process.
+
+##### Create a Personal Access Token
+
+To use GitHub Registry for your component library, you need to create a Personal Access Token with the appropriate permissions. The PAT expires on Oct 2023 and would need to be regenerated. Here's how to do it:
+
+1. Go to your GitHub account settings and click on "Developer settings" in the left-hand menu.
+2. Select "Personal access tokens" from the sub-menu, and create PAT Classic.
+3. Click on "Generate new token".
+4. Give the token a descriptive name and select the appropriate permissions. For using GitHub Registry, select the "write:packages" and "read:packages" permissions.
+5. Click on "Generate token" to create the token.
+
+##### Configure npm for GitHub Registry
+
+To configure npm to use GitHub Registry, you need to create an .npmrc file in the root of your project directory. Here's how to do it:
+
+1. Open a terminal and navigate to your project directory.
+2. Type yarn login --registry=https://npm.pkg.github.com and enter your GitHub username and Personal Access Token when prompted - You may only need a username and email. The login information is in Dashlane as a secure note (ask the project lead for access).
+
+3. Type echo "//npm.pkg.github.com/:\_authToken=${GITHUB_TOKEN}" >> .npmrc in your terminal. Replace GITHUB_TOKEN with your Personal Access Token. You will be able to find that information through Dashlane (Ask for access to "WL Component Lib Tokens")
+
+This will configure npm to use GitHub Registry for your project.
+
+##### Publish your Component Library
+
+To publish your component library to GitHub Registry, follow these steps:
+
+1. Type `yarn publish` in your terminal to publish your package to GitHub Registry.
+2. Increments the version field in your package.json file to a new version number & also commit on success.
+3. Your component library is now published and available on GitHub Registry.
+   Note: If asked for a password during publishing, you may take another approach (see Troubleshooting section)
+
+##### Installing Component Library
+
+To install your component library in another project, follow these steps:
+
+1. Add the following lines to the .npmrc file in your project directory:
+
+```
+//npm.pkg.github.com/:_authToken=GITHUB_TOKEN
+@username:registry=https://npm.pkg.github.com
+```
+
+Replace username with your GitHub username and GITHUB_TOKEN with your Personal Access Token.
+
+2. Type `yarn install @username/whitelabel-components` to install your component library.
+3. Your component library is now installed and ready to use in your project.
 
 ### Troubleshooting and solutions
 
@@ -173,3 +223,9 @@ Typescript 5.+ (used by this project) has dropped several methods expected for u
 #### twin.macro
 
 There are [several examples here](https://github.com/ben-rogerson/twin.examples) which may be useful if troubleshooting issues related to twin.macro.
+
+#### Yarn publish
+
+If asked for an (unknown) password when publishing the component library, you could add the following line to your .npmrc file.
+`@whitelabelco:registry=https://npm.pkg.github.com`
+Provied you also have the authentication token in your .npmrc file as described above, this should allow you to publish to the specified registry.

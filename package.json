@@ -1,7 +1,12 @@
 {
   "name": "@whitelabelco/whitelabel-components",
-  "version": "0.0.1",
+  "version": "0.0.13-alpha.14",
   "main": "dist/index.cjs.js",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "README.md"
+  ],
   "module": "dist/index.esm.js",
   "sideEffects": false,
   "types": "dist/typings/index.d.ts",
@@ -55,6 +60,7 @@
     "husky": "^8.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "pinst": "^3.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.6",
     "react": "^18.2.0",
