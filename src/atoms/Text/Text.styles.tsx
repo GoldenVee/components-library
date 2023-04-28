@@ -1,23 +1,11 @@
 import styled from 'styled-components';
 import tw, { TwStyle } from 'twin.macro';
-import { ThemeProps } from '../../themes';
+import { ThemeProps, styledThemeProps } from '../../themes';
 import { StyledTextProps } from './Text.props';
 
-const renderColors = ({ color }: StyledTextProps) => {
-  switch (color) {
-    case 'subtle':
-      return ({ theme }: { theme: ThemeProps }) => theme.colors.subtle;
-    case 'contrast':
-      return ({ theme }: { theme: ThemeProps }) => theme.colors.contrast;
-    case 'nonessential':
-      return ({ theme }: { theme: ThemeProps }) => theme.colors.nonessential;
-    case 'base':
-      return ({ theme }: { theme: ThemeProps }) => theme.colors.base;
-    case 'interactive':
-      return ({ theme }: { theme: ThemeProps }) => theme.colors.interactive;
-    default:
-      return `color: ${color}`;
-  }
+const renderColors = (color: string) => {
+  return ({ theme }: { theme: ThemeProps }) =>
+    theme.colors[color] || `color: ${color}`;
 };
 
 export const StyledText = styled.span<StyledTextProps>(({ allCaps }) => [
@@ -29,16 +17,16 @@ export const StyledText = styled.span<StyledTextProps>(({ allCaps }) => [
   ({ overflow }) => Overflow[overflow],
   ({ indent }) => Indent[indent],
   allCaps && tw`uppercase`,
-  (color) => renderColors(color),
+  ({ color }) => renderColors(color),
 ]);
 
-export const Alignment: TwStyle = {
+const Alignment: TwStyle = {
   left: tw`text-start`,
   right: tw`text-end`,
   center: tw`text-center`,
 };
 
-export const Sizes: TwStyle = {
+const Sizes: TwStyle = {
   xs: tw`text-xs leading-3`,
   sm: tw`text-sm leading-5`,
   base: tw`text-base leading-6`,
@@ -60,7 +48,7 @@ export const Sizes: TwStyle = {
   a: tw`text-base leading-6`,
 };
 
-export const Weights: TwStyle = {
+const Weights: TwStyle = {
   light: tw`font-light`,
   base: tw`font-normal`,
   md: tw`font-medium`,
@@ -78,50 +66,33 @@ export const Weights: TwStyle = {
   a: tw`font-normal`,
 };
 
-export type styledThemeProps = {
-  [key: string]: ({
-    theme,
-  }: {
-    theme: ThemeProps;
-  }) => string | TwStyle | undefined;
+const FontFamilies: styledThemeProps = {
+  serif: ({ theme }) => theme.fontFamily.serif,
+  sansSerif: ({ theme }) => theme.fontFamily.sansSerif,
+  monospace: ({ theme }) => theme.fontFamily.monospace,
+  h1: ({ theme }) => theme.fontFamily.primaryHeader,
+  h2: ({ theme }) => theme.fontFamily.secondaryHeader,
+  h3: ({ theme }) => theme.fontFamily.tertiaryHeader,
+  h4: ({ theme }) => theme.fontFamily.quaternaryHeader,
+  p: ({ theme }) => theme.fontFamily.body,
+  ul: ({ theme }) => theme.fontFamily.body,
+  ol: ({ theme }) => theme.fontFamily.body,
+  li: ({ theme }) => theme.fontFamily.body,
+  blockquote: ({ theme }) => theme.fontFamily.courierNew,
+  lead: ({ theme }) => theme.fontFamily.arial,
+  body: ({ theme }) => theme.fontFamily.body,
+  subtext: ({ theme }) => theme.fontFamily.subtext,
+  cambria: ({ theme }) => theme.fontFamily.cambria,
+  georgia: ({ theme }) => theme.fontFamily.georgia,
+  arial: ({ theme }) => theme.fontFamily.arial,
+  helveticaNeue: ({ theme }) => theme.fontFamily.helveticaNeue,
+  roboto: ({ theme }) => theme.fontFamily.roboto,
+  courierNew: ({ theme }) => theme.fontFamily.courierNew,
+  menlo: ({ theme }) => theme.fontFamily.menlo,
+  monoco: ({ theme }) => theme.fontFamily.monoco,
 };
 
-export const Colors: styledThemeProps = {
-  contrast: ({ theme }: { theme: ThemeProps }) => theme.colors.contrast,
-  base: ({ theme }: { theme: ThemeProps }) => theme.colors.base,
-  subtle: ({ theme }: { theme: ThemeProps }) => theme.colors.subtle,
-  nonessential: ({ theme }: { theme: ThemeProps }) => theme.colors.nonessential,
-  interactive: ({ theme }: { theme: ThemeProps }) => theme.colors.interactive,
-};
-
-export const FontFamilies: styledThemeProps = {
-  serif: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.serif,
-  sansSerif: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.sansSerif,
-  monospace: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.monospace,
-  h1: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.primaryHeader,
-  h2: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.secondaryHeader,
-  h3: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.tertiaryHeader,
-  h4: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.quaternaryHeader,
-  p: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.body,
-  ul: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.body,
-  ol: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.body,
-  li: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.body,
-  blockquote: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.courierNew,
-  lead: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.arial,
-  body: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.body,
-  subtext: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.subtext,
-  cambria: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.cambria,
-  georgia: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.georgia,
-  arial: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.arial,
-  helveticaNeue: ({ theme }: { theme: ThemeProps }) =>
-    theme.fontFamily.helveticaNeue,
-  roboto: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.roboto,
-  courierNew: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.courierNew,
-  menlo: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.menlo,
-  monoco: ({ theme }: { theme: ThemeProps }) => theme.fontFamily.monoco,
-};
-
-export const Stylizing: TwStyle = {
+const Stylizing: TwStyle = {
   none: tw`not-italic`,
   italic: tw`italic`,
   underline: tw`underline underline-offset-2`,
@@ -135,7 +106,7 @@ export const Stylizing: TwStyle = {
   blockquote: tw`border-l-4 border-indigo-500 pl-4 italic`,
 };
 
-export const Indent: TwStyle = {
+const Indent: TwStyle = {
   none: tw``,
   sm: tw`indent-4`,
   md: tw`indent-6`,
@@ -143,7 +114,7 @@ export const Indent: TwStyle = {
   li: tw`indent-1`,
 };
 
-export const Overflow: TwStyle = {
+const Overflow: TwStyle = {
   truncate: tw`truncate`,
   break: tw`break-words`,
   hyphen: tw`hyphens-auto`,

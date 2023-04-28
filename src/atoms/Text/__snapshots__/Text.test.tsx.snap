@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text renders as expected 1`] = `
+<div>
+  <div
+    class="Textstories__ExampleContainer-sc-qty84t-0 iHIlWT"
+  >
+    <p
+      class="Textstyles__StyledText-sc-1gtiq3l-0 fCuSLY"
+      color="base"
+      overflow="break"
+      role="p"
+    >
+      Test
+    </p>
+  </div>
+</div>
+`;

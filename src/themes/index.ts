@@ -2,6 +2,14 @@ import { getLightTheme } from './default/lighttheme';
 import { getDarkTheme } from './default/darktheme';
 import { TwStyle } from 'twin.macro';
 
+export type styledThemeProps = {
+  [key: string]: ({
+    theme,
+  }: {
+    theme: ThemeProps;
+  }) => string | TwStyle | undefined;
+};
+
 export interface ThemeProps {
   screens: ScreenProps;
   fontFamily: FontFamilyProps;
@@ -40,6 +48,7 @@ export interface FontFamilyProps {
 }
 
 export interface ColorProps {
+  [key: string]: TwStyle | string;
   // bg hierarchy colors
   bgLvl0: TwStyle | string;
   bgLvl0Accent: TwStyle | string;
