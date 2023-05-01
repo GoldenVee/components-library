@@ -21,7 +21,7 @@ export const Text = ({
   color = 'base',
   allCaps = false,
   stylize,
-  align = 'start',
+  align = 'left',
   overflow = 'break',
   indent = 'none',
   children,
