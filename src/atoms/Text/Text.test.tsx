@@ -1,76 +1,79 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { storiesOf } from '@storybook/react';
-// import { Default } from './Text.stories';
+import { Default } from './Text.stories';
 import { ThemeProvider } from 'styled-components';
 import { themes } from '../../themes/index';
-import { Text } from './Text';
+import { render } from '@testing-library/react';
+
 import tw from 'twin.macro';
 
-const stories = storiesOf('Text', module);
-
-stories.add('Default', () => (
-  <ThemeProvider theme={themes['light'] || themes['dark']}>
-    <Text role="h4">Example Text 1</Text>
-  </ThemeProvider>
-));
-stories.add('Custom Color', () => (
-  <ThemeProvider theme={themes['light'] || themes['dark']}>
-    <Text color="#119c59">Example Text 2</Text>
-  </ThemeProvider>
-));
-stories.add('Custom Size', () => (
-  <ThemeProvider theme={themes['light'] || themes['dark']}>
-    <Text size="xl">Example Text 3</Text>
-  </ThemeProvider>
-));
-stories.add('Custom All Caps', () => (
-  <ThemeProvider theme={themes['light'] || themes['dark']}>
-    <Text allCaps>Example Text 4</Text>
-  </ThemeProvider>
-));
+const ThemeWrapped = (Story: React.ReactElement) => {
+  return (
+    <ThemeProvider theme={themes['light'] || themes['dark']}>
+      {Story}
+    </ThemeProvider>
+  );
+};
 
 describe('Text component', () => {
-  it('renders correctly with children = "Example Text 1"', () => {
+  it('renders correctly with color = "subtle", with size = "xl", with align = "left", and with children = "Example Text 1"', () => {
+    const text = 'Example Text 1';
     const { getByText } = render(
-      <ThemeProvider theme={themes['light'] || themes['dark']}>
-        <Text role="h4">Example Text 1</Text>
-      </ThemeProvider>,
+      ThemeWrapped(
+        <Default color="subtle" size="xl" align="left" family="menlo">
+          {text}
+        </Default>,
+      ),
     );
-    const defaultElement = getByText('Example Text 1');
+    const defaultElement = getByText(text);
     expect(defaultElement).toBeInTheDocument();
+    expect(defaultElement).toHaveStyle({
+      fontSize: 'xl',
+      color: tw`text-slate-700` || tw`text-slate-300`,
+    });
   });
-
-  it('renders correctly with color = "#119c59" and children = "Example Text 2"', () => {
+  it('renders correctly with color = "#119c59", with size = "xl", with fontWeight = "semibold", with stylize = "italic", and with children = "Example Text 2"', () => {
+    const text = 'Example Text 2';
     const { getByText } = render(
-      <ThemeProvider theme={themes['light'] || themes['dark']}>
-        <Text color="#119c59">Example Text 2</Text>
-      </ThemeProvider>,
+      ThemeWrapped(
+        <Default color="#119c59" size="xl" weight="semibold" stylize="italic">
+          {text}
+        </Default>,
+      ),
     );
-    const textElement = getByText('Example Text 2');
-    expect(textElement).toBeInTheDocument();
-    expect(textElement).toHaveStyle(`color: #119c59;`);
+    const element = getByText(text);
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveStyle({
+      color: '#119c59',
+      fontSize: '1.25rem',
+      fontWeight: '600',
+      fontStyle: 'italic',
+    });
   });
-
-  it('renders correctly with size = "xl" and children = "Example Text 3"', () => {
+  it('renders correctly with color = "##119c59", with overflow = "truncate", with role = "blockquote", and with children = "Example Text 2"', () => {
+    const text = 'Example Text 2';
     const { getByText } = render(
-      <ThemeProvider theme={themes['light'] || themes['dark']}>
-        <Text size="xl">Example Text 3</Text>
-      </ThemeProvider>,
+      ThemeWrapped(
+        <Default
+          color="##119c59"
+          overflow="truncate"
+          role="blockquote"
+          stylize="italic"
+        >
+          {text}
+        </Default>,
+      ),
     );
-    const textElement = getByText('Example Text 3');
-    expect(textElement).toBeInTheDocument();
-    expect(textElement).toHaveStyle(tw`text-xl leading-7`);
-  });
-
-  it('renders correctly with allCaps = true and children = "Example Text 4"', () => {
-    const { getByText } = render(
-      <ThemeProvider theme={themes['light'] || themes['dark']}>
-        <Text allCaps>Example Text 4</Text>
-      </ThemeProvider>,
-    );
-    const textElement = getByText('Example Text 4');
-    expect(textElement).toBeInTheDocument();
-    expect(textElement).toHaveStyle('text-transform: uppercase');
+    const element = getByText(text);
+    expect(element).toBeInTheDocument();
+    expect(element).toHaveStyle({
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      fontWeight: '400',
+      fontStyle: 'italic',
+      color: 'base',
+    });
   });
 });

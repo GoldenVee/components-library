@@ -1,16 +1,9 @@
 import React from 'react';
-import { TextProps } from './Text.props';
+import { RoleProps, TextProps } from './Text.props';
 import { StyledText } from './Text.styles';
 
-const getRole = (role: string) => {
-  if (role === 'h1') return 'h1';
-  if (role === 'h2') return 'h2';
-  if (role === 'h3') return 'h3';
-  if (role === 'h4') return 'h4';
-  if (role === 'ul') return 'ul';
-  if (role === 'ol') return 'ol';
-  if (role === 'li') return 'li';
-  else return 'p';
+const getRole = (role: RoleProps) => {
+  return role || 'p';
 };
 
 export const Text = ({
