@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import tw, { TwStyle } from 'twin.macro';
-import { ThemeProps } from '../../themes';
+import { ThemeProps, styledThemeProps } from '../../themes';
 import { ButtonProps } from './Button.props';
 
 export const StyledButton = styled.button<ButtonProps>(
@@ -31,10 +31,6 @@ export const Sizes: TwStyle = {
   ml: tw`px-4 py-3 m-2 text-sm h-min`,
   large: tw`px-5 py-3.5 m-2 text-sm h-min`,
   xl: tw`px-6 py-4 m-2 text-base h-min`,
-};
-
-type styledThemeProps = {
-  [key: string]: ({ theme }: { theme: ThemeProps }) => string | TwStyle;
 };
 
 export const Variants: styledThemeProps = {
