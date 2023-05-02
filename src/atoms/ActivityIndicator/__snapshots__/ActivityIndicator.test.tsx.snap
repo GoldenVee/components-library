@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityIndicator renders as expected 1`] = `
+<div>
+  <div
+    class="ActivityIndicatorstories__ExampleContainer-sc-qbbf4o-0 bIyIDD"
+  >
+    <span
+      aria-busy="true"
+      aria-label="loading"
+      aria-live="polite"
+      role="alertdialog"
+      style="display: inherit; position: relative; width: 100px; height: 4px; overflow: hidden; background-color: rgba(59, 130, 246, 0.2); background-clip: padding-box;"
+    >
+      <span
+        style="position: absolute; height: 4px; overflow: hidden; background-color: rgb(59, 130, 246); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-long 2.1s  cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;"
+      />
+      <span
+        style="position: absolute; height: 4px; overflow: hidden; background-color: rgb(59, 130, 246); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-short 2.1s 1.15s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;"
+      />
+    </span>
+  </div>
+</div>
+`;
