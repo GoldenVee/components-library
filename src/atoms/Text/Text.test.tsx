@@ -14,6 +14,26 @@ const ThemeWrapped = (Story: React.ReactElement) => {
   );
 };
 
+describe('Text Button Snapshot', () => {
+  it('renders as expected', () => {
+    const { container } = render(
+      ThemeWrapped(
+        <Default
+          family="menlo"
+          stylize="italic"
+          size="2xl"
+          align="right"
+          weight="bold"
+          indent="md"
+        >
+          Text it out
+        </Default>,
+      ),
+    );
+    expect(container).toMatchSnapshot();
+  });
+});
+
 describe('Text component', () => {
   it('renders correctly with color = "subtle", with size = "xl", with align = "left", and with children = "Example Text 1"', () => {
     const text = 'Example Text 1';
@@ -31,6 +51,7 @@ describe('Text component', () => {
       color: tw`text-slate-700` || tw`text-slate-300`,
     });
   });
+
   it('renders correctly with color = "#119c59", with size = "xl", with fontWeight = "semibold", with stylize = "italic", and with children = "Example Text 2"', () => {
     const text = 'Example Text 2';
     const { getByText } = render(
@@ -49,6 +70,7 @@ describe('Text component', () => {
       fontStyle: 'italic',
     });
   });
+
   it('renders correctly with color = "##119c59", with overflow = "truncate", with role = "blockquote", and with children = "Example Text 2"', () => {
     const text = 'Example Text 2';
     const { getByText } = render(
