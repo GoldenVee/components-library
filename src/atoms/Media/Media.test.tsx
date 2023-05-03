@@ -1,16 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Default } from './Media.stories';
-import { ThemeProvider } from 'styled-components';
-import { themes } from '../../themes/index';
+import { ThemeWrapped } from '../../util/util';
 
 describe('Media', () => {
   it('renders as expected', () => {
-    const { container } = render(
-      <ThemeProvider theme={themes['light'] || themes['dark']}>
-        <Default title="test" />
-      </ThemeProvider>,
-    );
+    const { container } = render(ThemeWrapped(<Default title="test" />));
     expect(container).toMatchSnapshot();
   });
 });

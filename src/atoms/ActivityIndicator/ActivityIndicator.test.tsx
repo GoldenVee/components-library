@@ -1,16 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Default } from './ActivityIndicator.stories';
-import { ThemeProvider } from 'styled-components';
-import { themes } from '../../themes/index';
-
-const ThemeWrapped = (Story: React.ReactElement) => {
-  return (
-    <ThemeProvider theme={themes['light'] || themes['dark']}>
-      {Story}
-    </ThemeProvider>
-  );
-};
+import { ThemeWrapped } from '../../util/util';
 
 describe('ActivityIndicator', () => {
   it('renders as expected', () => {

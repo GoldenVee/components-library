@@ -47,7 +47,7 @@ const meta: Meta = {
       description:
         'Choose a custom color for the indicator. Can also accept one of these values: (maroon, red, orange, yellow, olive, green, purple, white, fuchsia, lime, teal, aqua, blue, navy, black, gray, silver) Defaults to interractive text color.',
       control: {
-        type: 'text',
+        type: 'color',
       },
     },
     override: {

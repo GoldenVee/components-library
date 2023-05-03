@@ -1,6 +1,7 @@
 import React from 'react';
 import { PlaceholderProps } from './Placeholder.props';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export const Placeholder = ({
   count,

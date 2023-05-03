@@ -44,14 +44,14 @@ const meta: Meta = {
     baseColor: {
       description: 'Choose a custom color for the placeholder skeleton.',
       control: {
-        type: 'text',
+        type: 'color',
       },
     },
     highlightColor: {
       description:
         'Choose a custom color for highlight used in the animation for the placeholder skeleton.',
       control: {
-        type: 'text',
+        type: 'color',
       },
     },
     inline: {
