@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Placeholder } from './Placeholder';
-import { PlaceholderProps } from './Placeholder.props';
+import { Placeholder } from './Skeleton';
+import { PlaceholderProps } from './Skeleton.props';
 import styled from 'styled-components';
 import { Text } from '../Text/Text';
 import { Button } from '../Button/Button';
