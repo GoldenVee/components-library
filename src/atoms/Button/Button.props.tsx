@@ -21,5 +21,6 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   iconPosition?: 'leading' | 'trailing';
   mediaSrc?: string | '';
   mediaAlt?: string | '';
+  indicator?: string;
   children?: React.ReactNode;
 }

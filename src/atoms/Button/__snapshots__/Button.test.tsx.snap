@@ -7,7 +7,7 @@ exports[`Button renders as expected 1`] = `
   >
     <button
       aria-label="test"
-      class="Buttonstyles__StyledButton-sc-iaqf7v-0 gIONrn"
+      class="Buttonstyles__StyledButton-sc-iaqf7v-0 cUJpYr"
       role="button"
     >
       <div

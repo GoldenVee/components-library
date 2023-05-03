@@ -101,6 +101,7 @@ const meta: Meta = {
       },
     },
     onClick: { action: 'clicked' },
+    loading: { control: { type: 'boolean' } },
   },
   parameters: {
     controls: { expanded: true },
@@ -188,7 +189,7 @@ const FullWidthTemplate: Story<ButtonProps> = (args) => (
       name="Full container width button"
       border="small"
       borderRadius="medium"
-      fullWidth={'true'}
+      fullWidth={true}
       {...args}
     />
     <Button name="Normal" border="medium" borderRadius="medium" {...args} />
@@ -239,6 +240,18 @@ const ChildrenTemplate: Story<ButtonProps> = (args) => (
         </p>
       </div>
     </Button>
+  </ExampleContainer>
+);
+
+const LoadingTemplate: Story<ButtonProps> = (args) => (
+  <ExampleContainer>
+    <Button
+      name="Loading"
+      variant="primary"
+      indicator="fade"
+      hasIcon
+      {...args}
+    />
   </ExampleContainer>
 );
 
@@ -312,6 +325,9 @@ DisabledButton.args = {
   fullWidth: false,
   hasIcon: false,
 };
+
+export const LoadingButton = LoadingTemplate.bind({});
+LoadingButton.args = {};
 
 export const ChildrenButton = ChildrenTemplate.bind({});
 ChildrenButton.args = {};

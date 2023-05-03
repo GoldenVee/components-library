@@ -25,12 +25,12 @@ export const LabelContainer = styled.div<ButtonProps>(({ hasIcon }) => [
 ]);
 
 export const Sizes: TwStyle = {
-  xs: tw`px-2 py-1.5 m-2 text-xs h-min`,
-  small: tw`px-2.5 py-1.5 m-2 text-sm h-min`,
-  medium: tw`px-3.5 py-2 m-2 text-sm h-min`,
-  ml: tw`px-4 py-3 m-2 text-sm h-min`,
-  large: tw`px-5 py-3.5 m-2 text-sm h-min`,
-  xl: tw`px-6 py-4 m-2 text-base h-min`,
+  xs: tw`px-2 py-1.5 m-2 text-xs h-min w-fit`,
+  small: tw`px-2.5 py-1.5 m-2 text-sm h-min w-fit`,
+  medium: tw`px-3.5 py-2 m-2 text-sm h-min w-fit`,
+  ml: tw`px-4 py-3 m-2 text-sm h-min w-fit`,
+  large: tw`px-5 py-3.5 m-2 text-sm h-min w-fit`,
+  xl: tw`px-6 py-4 m-2 text-base h-min w-fit`,
 };
 
 export const Variants: styledThemeProps = {
