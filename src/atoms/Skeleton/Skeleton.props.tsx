@@ -1,4 +1,4 @@
-export interface PlaceholderProps {
+export interface SkeletonProps {
   count?: number;
   width?: number | string;
   height?: number | string;
@@ -12,6 +12,6 @@ export interface PlaceholderProps {
   enableAnimation?: boolean;
 }
 
-export interface StyledPlaceholderProps {
+export interface StyledSkeletonProps {
   baseColor: string;
 }

@@ -1,55 +1,55 @@
 import React, { useState } from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Placeholder } from './Skeleton';
-import { PlaceholderProps } from './Skeleton.props';
+import { Skeleton } from './Skeleton';
+import { SkeletonProps } from './Skeleton.props';
 import styled from 'styled-components';
 import { Text } from '../Text/Text';
 import { Button } from '../Button/Button';
 
 const meta: Meta = {
-  title: 'atoms/Placeholder',
-  component: Placeholder,
+  title: 'atoms/Skeleton',
+  component: Skeleton,
   argTypes: {
     count: {
-      description: 'Determines how many lines are in the placeholder skeleton.',
+      description: 'Determines how many lines are in the Skeleton skeleton.',
       control: {
         type: 'number',
       },
     },
     width: {
       description:
-        'Width of the lines in the placeholder skeleton. If not specified, will get its width from the content its replacing.',
+        'Width of the lines in the Skeleton skeleton. If not specified, will get its width from the content its replacing.',
       control: {
         type: 'number',
       },
     },
     height: {
-      description: 'Height of the lines in the placeholder skeleton.',
+      description: 'Height of the lines in the Skeleton skeleton.',
       control: {
         type: 'number',
       },
     },
     borderRadius: {
-      description: 'The border radius of the placeholder skeleton.',
+      description: 'The border radius of the Skeleton skeleton.',
       control: {
         type: 'number',
       },
     },
     circle: {
-      description: 'Turns the placeholder skeleton into a circle.',
+      description: 'Turns the Skeleton skeleton into a circle.',
       control: {
         type: 'boolean',
       },
     },
     baseColor: {
-      description: 'Choose a custom color for the placeholder skeleton.',
+      description: 'Choose a custom color for the Skeleton skeleton.',
       control: {
         type: 'color',
       },
     },
     highlightColor: {
       description:
-        'Choose a custom color for highlight used in the animation for the placeholder skeleton.',
+        'Choose a custom color for highlight used in the animation for the Skeleton skeleton.',
       control: {
         type: 'color',
       },
@@ -98,13 +98,13 @@ const ExampleContainer = styled.div`
   max-width: 1000px;
 `;
 
-const Template: Story<PlaceholderProps> = (args) => (
+const Template: Story<SkeletonProps> = (args) => (
   <ExampleContainer>
-    <Placeholder {...args} />
+    <Skeleton {...args} />
   </ExampleContainer>
 );
 
-const ExampleTemplate: Story<PlaceholderProps> = (args) => {
+const ExampleTemplate: Story<SkeletonProps> = (args) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -125,18 +125,14 @@ const ExampleTemplate: Story<PlaceholderProps> = (args) => {
         style={{ marginTop: '48px' }}
         {...args}
       >
-        {isLoading ? (
-          <Placeholder width="30%" />
-        ) : (
-          'Amet cursus sit amet dictum.'
-        )}
+        {isLoading ? <Skeleton width="30%" /> : 'Amet cursus sit amet dictum.'}
       </Text>
       <Text role="h1" style={{ margin: '4px 0px 32px 0px' }} {...args}>
-        {isLoading ? <Placeholder width="74%" /> : 'Lorem ipsum dolor sit amet'}
+        {isLoading ? <Skeleton width="74%" /> : 'Lorem ipsum dolor sit amet'}
       </Text>
       <Text role="p" color="subtle" {...args}>
         {isLoading ? (
-          <Placeholder count={4} width="98%" />
+          <Skeleton count={4} width="98%" />
         ) : (
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         )}
@@ -149,7 +145,7 @@ const ExampleTemplate: Story<PlaceholderProps> = (args) => {
         {...args}
       >
         {isLoading ? (
-          <Placeholder width="26%" />
+          <Skeleton width="26%" />
         ) : (
           '*Mauris in aliquam sem fringilla ut'
         )}
@@ -157,7 +153,7 @@ const ExampleTemplate: Story<PlaceholderProps> = (args) => {
     </ExampleContainer>
   );
 };
-const RTLTemplate: Story<PlaceholderProps> = (args) => {
+const RTLTemplate: Story<SkeletonProps> = (args) => {
   const [rtlSupported, setRTLSupported] = useState(true);
 
   return (
@@ -178,7 +174,7 @@ const RTLTemplate: Story<PlaceholderProps> = (args) => {
           justifyContent: 'space-between',
         }}
       >
-        <Placeholder
+        <Skeleton
           circle
           width={42}
           height={42}
@@ -186,13 +182,13 @@ const RTLTemplate: Story<PlaceholderProps> = (args) => {
           direction={rtlSupported ? 'rtl' : 'ltr'}
           {...args}
         />
-        <Placeholder
+        <Skeleton
           count={2}
           width={300}
           direction={rtlSupported ? 'rtl' : 'ltr'}
           {...args}
         />
-        <Placeholder
+        <Skeleton
           count={2}
           width={360}
           direction={rtlSupported ? 'rtl' : 'ltr'}

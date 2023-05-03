@@ -1,9 +1,9 @@
 import React from 'react';
-import { PlaceholderProps } from './Skeleton.props';
+import { SkeletonProps } from './Skeleton.props';
 import LibSkeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-export const Placeholder = ({
+export const Skeleton = ({
   count,
   width,
   height,
@@ -15,7 +15,7 @@ export const Placeholder = ({
   duration,
   direction,
   enableAnimation,
-}: PlaceholderProps): JSX.Element => {
+}: SkeletonProps): JSX.Element => {
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia &&
