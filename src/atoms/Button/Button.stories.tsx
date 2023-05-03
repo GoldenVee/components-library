@@ -248,7 +248,10 @@ const LoadingTemplate: Story<ButtonProps> = (args) => (
     <Button
       name="Loading"
       variant="primary"
-      indicator="fade"
+      indicator="scale"
+      height={18}
+      width={1}
+      color="white"
       hasIcon
       {...args}
     />

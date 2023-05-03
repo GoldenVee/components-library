@@ -19,8 +19,20 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   disabled?: boolean;
   hasIcon?: boolean;
   iconPosition?: 'leading' | 'trailing';
+  indicator?: string;
   mediaSrc?: string | '';
   mediaAlt?: string | '';
-  indicator?: string;
   children?: React.ReactNode;
+}
+
+export interface FullButtonProps extends ButtonProps {
+  loading?: boolean;
+  speedMultiplier?: number;
+  color?: string;
+  indSize?: number | string;
+  height?: number | string;
+  width?: number | string;
+  radius?: number | string;
+  ariaLive?: 'polite' | 'assertive' | 'off';
+  indMargin?: number;
 }

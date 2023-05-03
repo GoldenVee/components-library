@@ -43,7 +43,7 @@ export const componentsMap: Record<string, IndicatorComponentType> = {
 
 export interface ActivityProps extends HTMLAttributes<HTMLDivElement> {
   indicator?: string;
-  loading: boolean;
+  loading?: boolean;
   speedMultiplier?: number;
   color?: string;
   override?: CSSProperties;
