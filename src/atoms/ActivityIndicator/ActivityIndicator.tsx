@@ -5,13 +5,13 @@ import {
 } from './ActivityIndicator.props';
 
 export const ActivityIndicator = ({
-  indicator,
-  loading,
+  indicator = 'bar',
+  loading = false,
   speedMultiplier,
-  color,
+  color = '#3b82f6',
   override,
   size,
-  ariaLive,
+  ariaLive = 'polite',
   height,
   width,
   radius,
@@ -33,10 +33,10 @@ export const ActivityIndicator = ({
 
   return (
     <IndicatorComponent
-      indicator={indicator ? indicator : 'bar'}
-      loading={loading ? loading : false}
+      indicator={indicator}
+      loading={loading}
       speedMultiplier={prefersReducedMotion ? 0.1 : speedMultiplier}
-      color={color ? color : '#3b82f6'}
+      color={color}
       override={override}
       size={size}
       margin={margin}
@@ -44,7 +44,7 @@ export const ActivityIndicator = ({
       width={width}
       radius={radius}
       aria-busy={loading}
-      aria-live={ariaLive ? ariaLive : 'polite'}
+      aria-live={ariaLive}
       aria-label={loading ? 'loading' : ''}
       role="alertdialog"
       {...props}

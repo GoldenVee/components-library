@@ -20,7 +20,7 @@ const meta: Meta = {
       description: 'Size of overall button.',
       control: {
         type: 'radio',
-        options: ['xs', 'small', 'medium', 'ml', 'large', 'xl'],
+        options: ['xs', 'sm', 'base', 'ml', 'lg', 'xl'],
       },
     },
     variant: {
@@ -32,7 +32,7 @@ const meta: Meta = {
           'primary',
           'secondary',
           'tertiary',
-          'quarterary',
+          'quaternary',
           'transparent',
           'confirm',
           'destroy',
@@ -44,32 +44,25 @@ const meta: Meta = {
       description: 'Toggle for border.',
       control: {
         type: 'radio',
-        options: ['none', 'small', 'medium'],
+        options: ['none', 'sm', 'md'],
       },
     },
     borderRadius: {
       description: 'Determine the intensity of the border radius.',
       control: {
         type: 'radio',
-        options: ['small', 'medium', 'large', 'round', 'none'],
+        options: ['none', 'sm', 'md', 'lg', 'round'],
       },
     },
     boxShadow: {
       description: 'Determine the size of the box shadow.',
       control: {
         type: 'radio',
-        options: ['small', 'large', 'inset', 'none'],
+        options: ['none', 'sm', 'lg', 'inset'],
       },
     },
     fullWidth: {
       description: 'Allow button to stretch the full width of the container.',
-      control: {
-        type: 'boolean',
-      },
-    },
-    hasIcon: {
-      description:
-        'Allows for an icon or media src and positions it trailing or leading.',
       control: {
         type: 'boolean',
       },
@@ -101,7 +94,7 @@ const meta: Meta = {
       },
     },
     onClick: { action: 'clicked' },
-    loading: { control: { type: 'boolean' } },
+    isLoading: { control: { type: 'boolean' } },
   },
   parameters: {
     controls: { expanded: true },
@@ -126,10 +119,10 @@ const Template: Story<ButtonProps> = (args) => {
 const SizesTemplate: Story<ButtonProps> = (args) => (
   <ExampleContainer>
     <Button size="xs" {...args} />
-    <Button size="small" {...args} />
-    <Button size="medium" {...args} />
+    <Button size="sm" {...args} />
+    <Button size="base" {...args} />
     <Button size="ml" {...args} />
-    <Button size="large" {...args} />
+    <Button size="lg" {...args} />
     <Button size="xl" {...args} />
   </ExampleContainer>
 );
@@ -139,7 +132,7 @@ const VariantsTemplate: Story<ButtonProps> = (args) => (
     <Button name="Primary" variant="primary" {...args} />
     <Button name="Secondary" variant="secondary" {...args} />
     <Button name="Tertiary" variant="tertiary" {...args} />
-    <Button name="Quarterary" variant="quarterary" {...args} />
+    <Button name="Quarterary" variant="quaternary" {...args} />
     <Button name="Transparent" variant="transparent" {...args} />
     <Button name="Gradient" variant="gradient" {...args} />
   </ExampleContainer>
@@ -154,32 +147,22 @@ const UtilVariantsTemplate: Story<ButtonProps> = (args) => (
 
 const BordersTemplate: Story<ButtonProps> = (args) => (
   <ExampleContainer>
-    <Button name="Small radius" borderRadius="small" {...args} />
-    <Button name="Medium radius" borderRadius="medium" {...args} />
-    <Button name="Large radius" borderRadius="large" {...args} />
-    <Button name="Round radius" borderRadius="round" {...args} />
     <Button name="No radius" borderRadius="none" {...args} />
-    <Button
-      name="Medium border"
-      border="medium"
-      borderRadius="medium"
-      {...args}
-    />
-    <Button
-      name="Small border"
-      border="small"
-      borderRadius="medium"
-      {...args}
-    />
+    <Button name="Small radius" borderRadius="sm" {...args} />
+    <Button name="Medium radius" borderRadius="md" {...args} />
+    <Button name="Large radius" borderRadius="lg" {...args} />
+    <Button name="Round radius" borderRadius="round" {...args} />
+    <Button name="Medium border" border="md" borderRadius="md" {...args} />
+    <Button name="Small border" border="sm" borderRadius="md" {...args} />
   </ExampleContainer>
 );
 
 const BoxShadowTemplate: Story<ButtonProps> = (args) => (
   <ExampleContainer>
-    <Button name="Small shadow" boxShadow="small" {...args} />
-    <Button name="Large shadow" boxShadow="large" {...args} />
-    <Button name="Inset shadow" boxShadow="inset" {...args} />
     <Button name="No box shadow" boxShadow="none" {...args} />
+    <Button name="Small shadow" boxShadow="sm" {...args} />
+    <Button name="Large shadow" boxShadow="lg" {...args} />
+    <Button name="Inset shadow" boxShadow="inset" {...args} />
   </ExampleContainer>
 );
 
@@ -187,12 +170,12 @@ const FullWidthTemplate: Story<ButtonProps> = (args) => (
   <ExampleContainer>
     <Button
       name="Full container width button"
-      border="small"
-      borderRadius="medium"
+      border="sm"
+      borderRadius="md"
       fullWidth={true}
       {...args}
     />
-    <Button name="Normal" border="medium" borderRadius="medium" {...args} />
+    <Button name="Normal" border="md" borderRadius="md" {...args} />
   </ExampleContainer>
 );
 const IconButtonTemplate: Story<ButtonProps> = (args) => (
@@ -248,11 +231,8 @@ const LoadingTemplate: Story<ButtonProps> = (args) => (
     <Button
       name="Loading"
       variant="primary"
-      indicator="scale"
-      height={18}
-      width={1}
-      color="white"
-      hasIcon
+      isLoading
+      iconPosition="leading"
       {...args}
     />
   </ExampleContainer>
@@ -263,70 +243,61 @@ const LoadingTemplate: Story<ButtonProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   name: 'Click me',
-  variant: 'primary',
-  size: 'large',
-  border: 'small',
-  borderRadius: 'medium',
-  boxShadow: 'small',
-  fullWidth: false,
 };
 
 export const Sizes = SizesTemplate.bind({});
 Sizes.args = {
   name: 'Click me',
-  variant: 'primary',
 };
 
 export const Variants = VariantsTemplate.bind({});
 Variants.args = {
-  size: 'large',
+  size: 'lg',
 };
 
 export const UtilVariants = UtilVariantsTemplate.bind({});
 UtilVariants.args = {
-  size: 'large',
+  size: 'lg',
 };
 
 export const Borders = BordersTemplate.bind({});
 Borders.args = {
-  size: 'large',
+  size: 'lg',
   variant: 'primary',
 };
 
 export const BoxShadow = BoxShadowTemplate.bind({});
 BoxShadow.args = {
   variant: 'tertiary',
-  size: 'large',
+  size: 'lg',
   border: 'none',
-  borderRadius: 'medium',
+  borderRadius: 'md',
 };
 
 export const FullWidth = FullWidthTemplate.bind({});
 FullWidth.args = {
   variant: 'primary',
-  border: 'small',
+  border: 'sm',
 };
 
 export const IconButton = IconButtonTemplate.bind({});
 IconButton.args = {
   variant: 'primary',
-  size: 'large',
-  border: 'small',
-  borderRadius: 'medium',
-  boxShadow: 'small',
+  size: 'lg',
+  border: 'sm',
+  borderRadius: 'md',
+  boxShadow: 'sm',
   fullWidth: false,
-  hasIcon: true,
 };
 
 export const DisabledButton = DisabledTemplate.bind({});
 DisabledButton.args = {
   variant: 'primary',
-  size: 'large',
-  border: 'small',
-  borderRadius: 'medium',
-  boxShadow: 'small',
+  size: 'lg',
+  border: 'sm',
+  borderRadius: 'md',
+  boxShadow: 'sm',
   fullWidth: false,
-  hasIcon: false,
 };
 
 export const LoadingButton = LoadingTemplate.bind({});

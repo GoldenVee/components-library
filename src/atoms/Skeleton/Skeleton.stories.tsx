@@ -111,7 +111,7 @@ const ExampleTemplate: Story<SkeletonProps> = (args) => {
     <ExampleContainer>
       <Button
         variant="primary"
-        size="small"
+        size="sm"
         name="Toggle Loading"
         onClick={() => setIsLoading(!isLoading)}
       />
@@ -153,51 +153,6 @@ const ExampleTemplate: Story<SkeletonProps> = (args) => {
     </ExampleContainer>
   );
 };
-const RTLTemplate: Story<SkeletonProps> = (args) => {
-  const [rtlSupported, setRTLSupported] = useState(true);
-
-  return (
-    <ExampleContainer dir={rtlSupported ? 'rtl' : 'ltr'}>
-      <Button
-        variant={'primary'}
-        size="small"
-        name="Toggle RTL"
-        onClick={() => setRTLSupported(!rtlSupported)}
-      />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          width: '45%',
-          marginTop: '32px',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Skeleton
-          circle
-          width={42}
-          height={42}
-          inline
-          direction={rtlSupported ? 'rtl' : 'ltr'}
-          {...args}
-        />
-        <Skeleton
-          count={2}
-          width={300}
-          direction={rtlSupported ? 'rtl' : 'ltr'}
-          {...args}
-        />
-        <Skeleton
-          count={2}
-          width={360}
-          direction={rtlSupported ? 'rtl' : 'ltr'}
-          {...args}
-        />
-      </div>
-    </ExampleContainer>
-  );
-};
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -206,6 +161,3 @@ Default.args = { count: 3, width: 300 };
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {};
-
-export const RTL = RTLTemplate.bind({});
-RTL.args = {};

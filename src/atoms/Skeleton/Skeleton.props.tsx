@@ -8,7 +8,6 @@ export interface SkeletonProps {
   highlightColor?: string;
   inline?: boolean;
   duration?: number;
-  direction?: 'rtl' | 'ltr';
   enableAnimation?: boolean;
 }
 

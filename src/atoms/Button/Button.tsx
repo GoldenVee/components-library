@@ -1,41 +1,17 @@
 import React from 'react';
-import { StyledButton, LabelContainer } from './Button.styles';
+import { StyledButton, LabelContainer, StyledIndicator } from './Button.styles';
 import { FullButtonProps } from './Button.props';
 import { Media } from '../Media/Media';
 import questionCircleIcon from '../../assets/images/question-circle-icon.png';
-import { ActivityIndicator } from '../ActivityIndicator/ActivityIndicator';
 
-const renderMedia = ({
+const MediaButton = ({
   mediaSrc,
   mediaAlt,
-  indicator,
-  ...props
+  size,
+  variant,
+  isLoading,
 }: FullButtonProps): JSX.Element => {
-  const {
-    color,
-    width,
-    height,
-    indSize,
-    speedMultiplier,
-    radius,
-    ariaLive,
-    indMargin,
-  } = props;
-  if (indicator)
-    return (
-      <ActivityIndicator
-        loading={true}
-        indicator={indicator}
-        color={color}
-        width={width}
-        height={height}
-        size={indSize}
-        speedMultiplier={speedMultiplier}
-        radius={radius}
-        ariaLive={ariaLive}
-        margin={indMargin}
-      />
-    );
+  if (isLoading) return <StyledIndicator size={size} variant={variant} />;
   return (
     <Media
       mediaSrc={mediaSrc ? mediaSrc : questionCircleIcon}
@@ -47,24 +23,24 @@ const renderMedia = ({
 
 export const Button = ({
   name,
-  size = 'medium',
+  size = 'base',
   variant = 'primary',
-  border = 'small',
-  borderRadius = 'medium',
-  boxShadow = 'small',
+  border = 'sm',
+  borderRadius = 'md',
+  boxShadow = 'sm',
   fullWidth = false,
-  hasIcon = false,
-  iconPosition = 'leading',
-  mediaSrc = '',
+  iconPosition,
+  mediaSrc = undefined,
   mediaAlt = '',
+  isLoading = false,
   disabled = false,
-  indicator,
   children,
   ...props
 }: FullButtonProps): JSX.Element => {
-  return children ? (
-    <button>{children}</button>
-  ) : (
+  const showIcon = isLoading || !!mediaSrc;
+
+  if (children) return <button>{children}</button>;
+  return (
     <StyledButton
       size={size}
       variant={variant}
@@ -72,21 +48,32 @@ export const Button = ({
       borderRadius={borderRadius}
       boxShadow={boxShadow}
       fullWidth={fullWidth}
-      hasIcon={hasIcon}
-      iconPosition={iconPosition}
       disabled={disabled}
-      indicator={indicator}
       {...props}
       aria-label={disabled ? `${name} disabled` : name}
       role="button"
     >
-      {hasIcon &&
-        iconPosition === 'leading' &&
-        renderMedia({ mediaSrc, mediaAlt, indicator, ...props })}
-      {name && <LabelContainer hasIcon={hasIcon}>{name}</LabelContainer>}
-      {hasIcon &&
-        iconPosition === 'trailing' &&
-        renderMedia({ mediaSrc, mediaAlt, indicator, ...props })}
+      {iconPosition === 'leading' && showIcon && (
+        <MediaButton
+          mediaSrc={mediaSrc}
+          mediaAlt={mediaAlt}
+          isLoading={isLoading}
+          size={size}
+          variant={variant}
+          width="icon"
+        />
+      )}
+      {name && <LabelContainer mediaSrc={mediaSrc}>{name}</LabelContainer>}
+      {iconPosition === 'trailing' && showIcon && (
+        <MediaButton
+          mediaSrc={mediaSrc}
+          mediaAlt={mediaAlt}
+          isLoading={isLoading}
+          size={size}
+          variant={variant}
+          width="icon"
+        />
+      )}
     </StyledButton>
   );
 };

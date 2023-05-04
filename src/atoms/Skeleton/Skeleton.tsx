@@ -13,7 +13,6 @@ export const Skeleton = ({
   highlightColor,
   inline,
   duration,
-  direction,
   enableAnimation,
 }: SkeletonProps): JSX.Element => {
   const prefersReducedMotion =
@@ -30,7 +29,6 @@ export const Skeleton = ({
       highlightColor={highlightColor ? highlightColor : '#cbd5e1'}
       inline={inline}
       duration={duration}
-      direction={direction}
       enableAnimation={prefersReducedMotion ? false : enableAnimation}
     >
       <LibSkeleton count={count} circle={circle} />

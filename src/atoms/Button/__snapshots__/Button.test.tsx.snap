@@ -7,11 +7,11 @@ exports[`Button renders as expected 1`] = `
   >
     <button
       aria-label="test"
-      class="Buttonstyles__StyledButton-sc-iaqf7v-0 cUJpYr"
+      class="Buttonstyles__StyledButton-sc-iaqf7v-0 imufbX"
       role="button"
     >
       <div
-        class="Buttonstyles__LabelContainer-sc-iaqf7v-1 BxQFd"
+        class="Buttonstyles__LabelContainer-sc-iaqf7v-1 fUmbti"
       >
         test
       </div>

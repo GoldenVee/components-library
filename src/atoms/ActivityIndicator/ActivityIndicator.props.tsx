@@ -42,11 +42,10 @@ export const componentsMap: Record<string, IndicatorComponentType> = {
 };
 
 export interface ActivityProps extends HTMLAttributes<HTMLDivElement> {
-  indicator?: string;
   loading?: boolean;
   speedMultiplier?: number;
-  color?: string;
   override?: CSSProperties;
+  color?: string;
   size?: number | string;
   height?: number | string;
   width?: number | string;
@@ -56,5 +55,16 @@ export interface ActivityProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export interface ActivityIndicatorProps extends ActivityProps {
-  indicator?: string;
+  indicator?:
+    | 'bar'
+    | 'bounce'
+    | 'clip'
+    | 'dot'
+    | 'fade'
+    | 'propagate'
+    | 'pulse'
+    | 'rotate'
+    | 'scale'
+    | 'skew'
+    | 'square';
 }
