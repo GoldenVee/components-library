@@ -20,6 +20,7 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
   iconPosition?: 'leading' | 'trailing';
   mediaSrc?: string | '';
   mediaAlt?: string | '';
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children?: React.ReactNode;
 }
 

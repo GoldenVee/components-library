@@ -5,7 +5,11 @@ import { ThemeProps, styledThemeProps } from '../../themes';
 import { ButtonProps, FullButtonProps } from './Button.props';
 import { ActivityIndicator } from '../ActivityIndicator/ActivityIndicator';
 
-export const StyledButton = styled.button<ButtonProps>(
+export const StyledBaseButton = styled.button(
+  tw`flex flex-row justify-center items-center`,
+);
+
+export const StyledButton = styled(StyledBaseButton)<ButtonProps>(
   ({ variant, fullWidth, disabled, theme }) => [
     ({ variant = 'primary' }) => Variants[variant],
     ({ size = 'medium' }) => Sizes[size],
@@ -17,7 +21,6 @@ export const StyledButton = styled.button<ButtonProps>(
     disabled &&
       variant === 'transparent' &&
       tw`disabled:opacity-75 bg-slate-200`,
-    tw`flex flex-row justify-center items-center`,
   ],
 );
 

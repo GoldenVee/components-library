@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyledButton, LabelContainer, StyledIndicator } from './Button.styles';
+import {
+  StyledBaseButton,
+  StyledButton,
+  LabelContainer,
+  StyledIndicator,
+} from './Button.styles';
 import { FullButtonProps } from './Button.props';
 import { Media } from '../Media/Media';
 import questionCircleIcon from '../../assets/images/question-circle-icon.png';
@@ -35,11 +40,13 @@ export const Button = ({
   isLoading = false,
   disabled = false,
   children,
+  onClick,
   ...props
 }: FullButtonProps): JSX.Element => {
   const showIcon = isLoading || !!mediaSrc;
 
-  if (children) return <button>{children}</button>;
+  if (children)
+    return <StyledBaseButton onClick={onClick}>{children}</StyledBaseButton>;
   return (
     <StyledButton
       size={size}
@@ -48,7 +55,8 @@ export const Button = ({
       borderRadius={borderRadius}
       boxShadow={boxShadow}
       fullWidth={fullWidth}
-      disabled={disabled}
+      disabled={isLoading ? true : disabled}
+      onClick={onClick}
       {...props}
       aria-label={disabled ? `${name} disabled` : name}
       role="button"
