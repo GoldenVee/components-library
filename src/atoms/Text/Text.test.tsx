@@ -1,18 +1,9 @@
 import React from 'react';
 import { Default } from './Text.stories';
-import { ThemeProvider } from 'styled-components';
-import { themes } from '../../themes/index';
 import { render } from '@testing-library/react';
 
 import tw from 'twin.macro';
-
-const ThemeWrapped = (Story: React.ReactElement) => {
-  return (
-    <ThemeProvider theme={themes['light'] || themes['dark']}>
-      {Story}
-    </ThemeProvider>
-  );
-};
+import { ThemeWrapped } from '../../util/util';
 
 describe('Text Button Snapshot', () => {
   it('renders as expected', () => {

@@ -107,6 +107,8 @@
     "babel-plugin-styled-components": "^2.1.1",
     "babel-plugin-twin": "^1.1.0",
     "polished": "^4.2.2",
+    "react-loading-skeleton": "^3.2.1",
+    "react-spinners": "^0.13.8",
     "styled-components": "^5.3.9",
     "twin.macro": "^3.3.0"
   },

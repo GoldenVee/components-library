@@ -1,12 +1,22 @@
-import React, { forwardRef, ComponentPropsWithoutRef } from 'react';
-import { StyledButton, LabelContainer } from './Button.styles';
-import { ButtonProps } from './Button.props';
+import React from 'react';
+import {
+  StyledBaseButton,
+  StyledButton,
+  LabelContainer,
+  StyledIndicator,
+} from './Button.styles';
+import { FullButtonProps } from './Button.props';
 import { Media } from '../Media/Media';
 import questionCircleIcon from '../../assets/images/question-circle-icon.png';
 
-export type Ref = HTMLButtonElement;
-
-const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
+const MediaButton = ({
+  mediaSrc,
+  mediaAlt,
+  size,
+  variant,
+  isLoading,
+}: FullButtonProps): JSX.Element => {
+  if (isLoading) return <StyledIndicator size={size} variant={variant} />;
   return (
     <Media
       mediaSrc={mediaSrc ? mediaSrc : questionCircleIcon}
@@ -16,56 +26,64 @@ const renderMedia = ({ mediaSrc, mediaAlt }: ButtonProps): JSX.Element => {
   );
 };
 
-export const Button = forwardRef<Ref, ComponentPropsWithoutRef<'button'>>(
-  (
-    {
-      name,
-      size = 'medium',
-      variant = 'primary',
-      border = 'small',
-      borderRadius = 'medium',
-      boxShadow = 'small',
-      fullWidth = false,
-      hasIcon = false,
-      iconPosition = 'leading',
-      mediaSrc = '',
-      mediaAlt = '',
-      disabled = false,
-      children,
-      onClick,
-      ...props
-    }: ButtonProps,
-    ref,
-  ): JSX.Element => {
-    return children ? (
-      <button onClick={onClick}>{children}</button>
-    ) : (
-      <StyledButton
-        size={size}
-        variant={variant}
-        border={border}
-        borderRadius={borderRadius}
-        boxShadow={boxShadow}
-        fullWidth={fullWidth}
-        hasIcon={hasIcon}
-        iconPosition={iconPosition}
-        disabled={disabled}
-        onClick={onClick}
-        ref={ref}
-        {...props}
-        aria-label={disabled ? `${name} disabled` : name}
-        role="button"
-      >
-        {hasIcon &&
-          iconPosition === 'leading' &&
-          renderMedia({ mediaSrc, mediaAlt })}
-        {name && <LabelContainer hasIcon={hasIcon}>{name}</LabelContainer>}
-        {hasIcon &&
-          iconPosition === 'trailing' &&
-          renderMedia({ mediaSrc, mediaAlt })}
-      </StyledButton>
-    );
-  },
-);
+export const Button = ({
+  name,
+  size = 'base',
+  variant = 'primary',
+  border = 'sm',
+  borderRadius = 'md',
+  boxShadow = 'sm',
+  fullWidth = false,
+  iconPosition,
+  mediaSrc = undefined,
+  mediaAlt = '',
+  isLoading = false,
+  disabled = false,
+  children,
+  onClick,
+  ...props
+}: FullButtonProps): JSX.Element => {
+  const showIcon = isLoading || !!mediaSrc;
+
+  if (children)
+    return <StyledBaseButton onClick={onClick}>{children}</StyledBaseButton>;
+  return (
+    <StyledButton
+      size={size}
+      variant={variant}
+      border={border}
+      borderRadius={borderRadius}
+      boxShadow={boxShadow}
+      fullWidth={fullWidth}
+      disabled={isLoading ? true : disabled}
+      onClick={onClick}
+      {...props}
+      aria-label={disabled ? `${name} disabled` : name}
+      role="button"
+    >
+      {iconPosition === 'leading' && showIcon && (
+        <MediaButton
+          mediaSrc={mediaSrc}
+          mediaAlt={mediaAlt}
+          isLoading={isLoading}
+          size={size}
+          variant={variant}
+          width="icon"
+        />
+      )}
+      {name && <LabelContainer mediaSrc={mediaSrc}>{name}</LabelContainer>}
+      {iconPosition === 'trailing' && showIcon && (
+        <MediaButton
+          mediaSrc={mediaSrc}
+          mediaAlt={mediaAlt}
+          isLoading={isLoading}
+          size={size}
+          variant={variant}
+          width="icon"
+        />
+      )}
+    </StyledButton>
+  );
+};
 
 Button.displayName = 'Button';

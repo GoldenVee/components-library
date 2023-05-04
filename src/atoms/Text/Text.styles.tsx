@@ -15,9 +15,9 @@ export const StyledText = styled.span<StyledTextProps>(({ allCaps }) => [
   ({ stylize }) => Stylizing[stylize],
   ({ align }) => Alignment[align],
   ({ overflow }) => Overflow[overflow],
-  ({ indent }) => Indent[indent],
   allCaps && tw`uppercase`,
   ({ color }) => renderColors(color),
+  ({ indent }) => Indent[indent],
 ]);
 
 const Alignment: TwStyle = {
