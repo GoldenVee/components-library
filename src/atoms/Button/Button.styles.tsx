@@ -16,7 +16,11 @@ const prefersReducedMotion =
   window.matchMedia &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export const StyledButton = styled.button<StyledButtonProps>(
+export const StyledBaseButton = styled.button(
+  tw`flex flex-row justify-center items-center`,
+);
+
+export const StyledButton = styled(StyledBaseButton)<StyledButtonProps>(
   ({
     variant = 'primary',
     size = 'base',

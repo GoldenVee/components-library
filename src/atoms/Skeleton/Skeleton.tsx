@@ -5,12 +5,12 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 export const Skeleton = ({
   count,
-  width,
+  width = 150,
   height,
   borderRadius,
   circle,
-  baseColor,
-  highlightColor,
+  baseColor = '#94a3b8',
+  highlightColor = '#cbd5e1',
   inline,
   duration,
   enableAnimation,
@@ -22,11 +22,11 @@ export const Skeleton = ({
 
   return (
     <SkeletonTheme
-      width={width ? width : 150}
+      width={width}
       height={height}
       borderRadius={borderRadius}
-      baseColor={baseColor ? baseColor : '#94a3b8'}
-      highlightColor={highlightColor ? highlightColor : '#cbd5e1'}
+      baseColor={baseColor}
+      highlightColor={highlightColor}
       inline={inline}
       duration={duration}
       enableAnimation={prefersReducedMotion ? false : enableAnimation}
