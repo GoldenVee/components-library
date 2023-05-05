@@ -8,7 +8,7 @@ export const ActivityIndicator = ({
   indicator = 'bar',
   loading = false,
   speedMultiplier,
-  color = '#3b82f6',
+  color = 'teal',
   override,
   size,
   ariaLive = 'polite',

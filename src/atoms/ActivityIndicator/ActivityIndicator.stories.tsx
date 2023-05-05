@@ -12,6 +12,7 @@ const meta: Meta = {
     indicator: {
       description:
         'Select indicator type. Certain style elements can only be used on certain indicators (ex: skew accepts size but not width and height)',
+      table: { defaultValue: { summary: 'bar' } },
       control: {
         type: 'radio',
         options: [
@@ -32,6 +33,7 @@ const meta: Meta = {
     loading: {
       description:
         'If the indicator is loading, its visible. Otherwise its hidden.',
+      table: { defaultValue: { summary: 'false' } },
       control: {
         type: 'boolean',
       },
@@ -39,6 +41,7 @@ const meta: Meta = {
     speedMultiplier: {
       description:
         'Determines the speed of the indicator. If prefers-reduced-motion is turned on, this defaults to 0.1 speed.',
+      table: { defaultValue: { summary: '1' } },
       control: {
         type: 'number',
       },
@@ -46,6 +49,7 @@ const meta: Meta = {
     color: {
       description:
         'Choose a custom color for the indicator. Can also accept one of these values: (maroon, red, orange, yellow, olive, green, purple, white, fuchsia, lime, teal, aqua, blue, navy, black, gray, silver) Defaults to interractive text color.',
+      table: { defaultValue: { summary: 'teal' } },
       control: {
         type: 'color',
       },
@@ -60,6 +64,7 @@ const meta: Meta = {
     size: {
       description:
         'Determines the size of bounce, clip, dot, propagate, pulse, rotate, skew, and square indicators. Some indicators require a specific width and height.',
+      table: { defaultValue: { summary: 'depends on indicator' } },
       control: {
         type: 'number',
       },
@@ -67,6 +72,7 @@ const meta: Meta = {
     width: {
       description:
         'Determines the width of bar, fade, and scale indicators. Some indicators require only a specified size.',
+      table: { defaultValue: { summary: 'depends on indicator' } },
       control: {
         type: 'number',
       },
@@ -74,6 +80,7 @@ const meta: Meta = {
     height: {
       description:
         'Determines the height of bar, fade, and scale indicators. Some indicators require only a specified size.',
+      table: { defaultValue: { summary: 'depends on indicator' } },
       control: {
         type: 'number',
       },
@@ -81,6 +88,7 @@ const meta: Meta = {
     radius: {
       description:
         'For fade and scale indicators, you can customize the radius.',
+      table: { defaultValue: { summary: 'depends on indicator' } },
       control: {
         type: 'number',
       },
@@ -88,6 +96,7 @@ const meta: Meta = {
     margin: {
       description:
         'For fade, pulse, rotate, and scale indicators, you can customize the margin around the indicator.',
+      table: { defaultValue: { summary: 'depends on indicator' } },
       control: {
         type: 'number',
       },
@@ -95,6 +104,7 @@ const meta: Meta = {
     ariaLive: {
       description:
         'For accessibility for screen readers, choose between polite for loading of smaller less crucial elements of the page or assertive for major changes like page loading.',
+      table: { defaultValue: { summary: 'polite' } },
       control: {
         type: 'radio',
         options: ['polite', 'assertive', 'off'],
@@ -222,3 +232,19 @@ export const Default = Template.bind({});
 Default.args = { loading: true };
 export const AllOptions = AllOptionsTemplate.bind({});
 AllOptions.args = { loading: true };
+AllOptions.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'width',
+      'height',
+      'indicator',
+      'loading',
+      'radius',
+      'ariaLive',
+      'margin',
+      'override',
+    ],
+  },
+};

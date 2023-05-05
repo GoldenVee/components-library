@@ -11,12 +11,11 @@ export const Text = ({
   role = 'p',
   size,
   weight,
-  color = 'base',
+  color = 'primary',
   allCaps = false,
   stylize,
   align = 'left',
   overflow = 'break',
-  indent = 'none',
   children,
   ...props
 }: TextProps): JSX.Element => {
@@ -32,7 +31,6 @@ export const Text = ({
       stylize={stylize ? stylize : role}
       align={align}
       overflow={overflow}
-      indent={indent}
       {...props}
     >
       {children}

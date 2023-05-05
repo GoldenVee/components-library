@@ -1,121 +1,174 @@
 import styled from 'styled-components';
-import tw, { TwStyle } from 'twin.macro';
 import { ThemeProps, styledThemeProps } from '../../themes';
 import { StyledTextProps } from './Text.props';
 
-const renderColors = (color: string) => {
-  return ({ theme }: { theme: ThemeProps }) =>
-    theme.colors[color] || `color: ${color}`;
+export const StyledText = styled.span<StyledTextProps>(
+  ({
+    size,
+    role = 'p',
+    weight,
+    family,
+    stylize,
+    align = 'left',
+    overflow,
+    allCaps,
+    color,
+    theme,
+  }) => ({
+    display: role === 'li' ? 'list-item' : 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'column',
+    color:
+      typeof color === 'string' && fontColors[color]
+        ? fontColors[color]({ theme })
+        : color,
+    fontSize: fontSizes[size ? size : role]({ theme }),
+    lineHeight: fontLH[size ? size : role]({ theme }),
+    fontWeight: fontWeights[weight ? weight : role]({ theme }),
+    fontFamily: fontFamilies[family ? family : role]({ theme }),
+    fontStyle:
+      stylize === 'italic' || role === 'h3' || role === 'blockquote'
+        ? 'italic'
+        : 'normal',
+    textDecorationLine:
+      stylize === 'underline' || role === 'a'
+        ? 'underline'
+        : stylize === 'strike'
+        ? 'line-through'
+        : 'normal',
+    textAlign: align,
+    overflowWrap: overflow === 'break' ? 'break-word' : 'normal',
+    hyphens: overflow === 'hyphen' ? 'auto' : undefined,
+    letterSpacing: stylize === 'h4' ? '-0.05em' : '0em',
+    textTransform: allCaps ? 'uppercase' : 'none',
+    listStyle: 'inside',
+    padding: role === 'li' ? '6px 0px' : '8px 0px',
+    paddingLeft: role == 'blockquote' ? '6px' : '0px',
+    borderLeft:
+      role === 'blockquote' ? `4px solid ${theme.colors.primary}` : 'none',
+    '&:hover': {},
+    '&:focus': {
+      border: '3px solid rgba(99, 102, 241, 0.8)',
+    },
+  }),
+);
+
+const fontColors: styledThemeProps = {
+  primary: ({ theme }: { theme: ThemeProps }) => theme.colors.font.primary,
+  secondary: ({ theme }: { theme: ThemeProps }) => theme.colors.font.secondary,
+  tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.font.tertiary,
+  contrast: ({ theme }: { theme: ThemeProps }) => theme.colors.font.contrast,
+  interactive: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.interactive,
+  primaryHead: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.heading.primary,
+  secondaryHead: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.heading.secondary,
+  tertiaryHead: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.heading.tertiary,
+  quaternaryHead: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.heading.quaternary,
 };
 
-export const StyledText = styled.span<StyledTextProps>(({ allCaps }) => [
-  ({ size }) => Sizes[size],
-  ({ weight }) => Weights[weight],
-  ({ family }) => FontFamilies[family],
-  ({ stylize }) => Stylizing[stylize],
-  ({ align }) => Alignment[align],
-  ({ overflow }) => Overflow[overflow],
-  allCaps && tw`uppercase`,
-  ({ color }) => renderColors(color),
-  ({ indent }) => Indent[indent],
-]);
-
-const Alignment: TwStyle = {
-  left: tw`text-start`,
-  right: tw`text-end`,
-  center: tw`text-center`,
+const fontSizes: styledThemeProps = {
+  xs: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xs,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.typography.size.sm,
+  base: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.typography.size.lg,
+  xl: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xl,
+  xxl: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xxl,
+  xxxl: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xxxl,
+  ivxl: ({ theme }: { theme: ThemeProps }) => theme.typography.size.ivxl,
+  vxl: ({ theme }: { theme: ThemeProps }) => theme.typography.size.vxl,
+  h1: ({ theme }: { theme: ThemeProps }) => theme.typography.size.vxl,
+  h2: ({ theme }: { theme: ThemeProps }) => theme.typography.size.ivxl,
+  h3: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xxxl,
+  h4: ({ theme }: { theme: ThemeProps }) => theme.typography.size.xxl,
+  p: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  ul: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  ol: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  li: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  blockquote: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+  a: ({ theme }: { theme: ThemeProps }) => theme.typography.size.base,
+};
+const fontLH: styledThemeProps = {
+  xs: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xs,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.sm,
+  base: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.lg,
+  xl: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xl,
+  xxl: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xxl,
+  xxxl: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xxxl,
+  ivxl: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.ivxl,
+  vxl: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.vxl,
+  h1: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.vxl,
+  h2: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.ivxl,
+  h3: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xxxl,
+  h4: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.xxl,
+  p: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
+  ul: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
+  ol: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
+  li: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
+  blockquote: ({ theme }: { theme: ThemeProps }) =>
+    theme.typography.lineHeight.base,
+  a: ({ theme }: { theme: ThemeProps }) => theme.typography.lineHeight.base,
 };
 
-const Sizes: TwStyle = {
-  xs: tw`text-xs leading-3`,
-  sm: tw`text-sm leading-5`,
-  base: tw`text-base leading-6`,
-  lg: tw`text-lg leading-7`,
-  xl: tw`text-xl leading-7`,
-  '2xl': tw`text-2xl leading-8`,
-  '3xl': tw`text-3xl leading-9`,
-  '4xl': tw`text-4xl leading-10`,
-  '5xl': tw`text-5xl leading-11`,
-  h1: tw`text-5xl leading-11`,
-  h2: tw`text-4xl leading-10`,
-  h3: tw`text-3xl leading-9`,
-  h4: tw`text-2xl leading-8`,
-  p: tw`text-base leading-6`,
-  ul: tw`text-base leading-6`,
-  ol: tw`text-base leading-6`,
-  li: tw`text-base leading-6`,
-  blockquote: tw`text-base leading-6`,
-  a: tw`text-base leading-6`,
+const fontWeights: styledThemeProps = {
+  light: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.light,
+  base: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
+  md: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.md,
+  semibold: ({ theme }: { theme: ThemeProps }) =>
+    theme.typography.weight.semibold,
+  bold: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.bold,
+  h1: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.bold,
+  h2: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.bold,
+  h3: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.bold,
+  h4: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.bold,
+  p: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
+  ul: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
+  ol: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
+  li: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
+  blockquote: ({ theme }: { theme: ThemeProps }) =>
+    theme.typography.weight.base,
+  a: ({ theme }: { theme: ThemeProps }) => theme.typography.weight.base,
 };
 
-const Weights: TwStyle = {
-  light: tw`font-light`,
-  base: tw`font-normal`,
-  md: tw`font-medium`,
-  semibold: tw`font-semibold`,
-  bold: tw`font-bold`,
-  h1: tw`font-bold `,
-  h2: tw`font-bold`,
-  h3: tw`font-bold`,
-  h4: tw`font-bold`,
-  p: tw`font-normal`,
-  ul: tw`font-normal`,
-  ol: tw`font-normal`,
-  li: tw`font-normal`,
-  blockquote: tw`font-normal`,
-  a: tw`font-normal`,
-};
-
-const FontFamilies: styledThemeProps = {
-  serif: ({ theme }) => theme.fontFamily.serif,
-  sansSerif: ({ theme }) => theme.fontFamily.sansSerif,
-  monospace: ({ theme }) => theme.fontFamily.monospace,
-  h1: ({ theme }) => theme.fontFamily.primaryHeader,
-  h2: ({ theme }) => theme.fontFamily.secondaryHeader,
-  h3: ({ theme }) => theme.fontFamily.tertiaryHeader,
-  h4: ({ theme }) => theme.fontFamily.quaternaryHeader,
-  p: ({ theme }) => theme.fontFamily.body,
-  ul: ({ theme }) => theme.fontFamily.body,
-  ol: ({ theme }) => theme.fontFamily.body,
-  li: ({ theme }) => theme.fontFamily.body,
-  blockquote: ({ theme }) => theme.fontFamily.courierNew,
-  lead: ({ theme }) => theme.fontFamily.arial,
-  body: ({ theme }) => theme.fontFamily.body,
-  subtext: ({ theme }) => theme.fontFamily.subtext,
-  cambria: ({ theme }) => theme.fontFamily.cambria,
-  georgia: ({ theme }) => theme.fontFamily.georgia,
-  arial: ({ theme }) => theme.fontFamily.arial,
-  helveticaNeue: ({ theme }) => theme.fontFamily.helveticaNeue,
-  roboto: ({ theme }) => theme.fontFamily.roboto,
-  courierNew: ({ theme }) => theme.fontFamily.courierNew,
-  menlo: ({ theme }) => theme.fontFamily.menlo,
-  monoco: ({ theme }) => theme.fontFamily.monoco,
-};
-
-const Stylizing: TwStyle = {
-  none: tw`not-italic`,
-  italic: tw`italic`,
-  underline: tw`underline underline-offset-2`,
-  strike: tw`line-through`,
-  h3: tw`italic`,
-  h4: tw`tracking-tighter`,
-  a: tw`underline underline-offset-2`,
-  ul: tw`list-disc`,
-  ol: tw`list-decimal`,
-  li: tw`ml-8 pt-2`,
-  blockquote: tw`border-l-4 border-indigo-500 pl-4 italic`,
-};
-
-const Indent: TwStyle = {
-  none: tw``,
-  sm: tw`indent-4`,
-  md: tw`indent-6`,
-  lg: tw`indent-8`,
-  li: tw`indent-1`,
-};
-
-const Overflow: TwStyle = {
-  truncate: tw`truncate`,
-  break: tw`break-words`,
-  hyphen: tw`hyphens-auto`,
+const fontFamilies: styledThemeProps = {
+  serif: ({ theme }) => theme.typography.fontFamily.serif,
+  sansSerif: ({ theme }) => theme.typography.fontFamily.sansSerif,
+  monospace: ({ theme }) => theme.typography.fontFamily.monospace,
+  h1: ({ theme }) => theme.typography.fontFamily.primaryHeader,
+  h2: ({ theme }) => theme.typography.fontFamily.secondaryHeader,
+  h3: ({ theme }) => theme.typography.fontFamily.tertiaryHeader,
+  h4: ({ theme }) => theme.typography.fontFamily.quaternaryHeader,
+  p: ({ theme }) => theme.typography.fontFamily.body,
+  ul: ({ theme }) => theme.typography.fontFamily.body,
+  ol: ({ theme }) => theme.typography.fontFamily.body,
+  li: ({ theme }) => theme.typography.fontFamily.body,
+  blockquote: ({ theme }) =>
+    theme.typography.fontFamily.courierNew ||
+    theme.typography.fontFamily.monospace,
+  lead: ({ theme }) =>
+    theme.typography.fontFamily.arial || theme.typography.fontFamily.body,
+  body: ({ theme }) => theme.typography.fontFamily.body,
+  subtext: ({ theme }) => theme.typography.fontFamily.subtext,
+  cambria: ({ theme }) =>
+    theme.typography.fontFamily.cambria || theme.typography.fontFamily.serif,
+  georgia: ({ theme }) =>
+    theme.typography.fontFamily.georgia || theme.typography.fontFamily.serif,
+  arial: ({ theme }) =>
+    theme.typography.fontFamily.arial || theme.typography.fontFamily.sansSerif,
+  helveticaNeue: ({ theme }) =>
+    theme.typography.fontFamily.helveticaNeue ||
+    theme.typography.fontFamily.sansSerif,
+  roboto: ({ theme }) =>
+    theme.typography.fontFamily.roboto || theme.typography.fontFamily.sansSerif,
+  courierNew: ({ theme }) =>
+    theme.typography.fontFamily.courierNew ||
+    theme.typography.fontFamily.monospace,
+  menlo: ({ theme }) =>
+    theme.typography.fontFamily.menlo || theme.typography.fontFamily.monospace,
+  monaco: ({ theme }) =>
+    theme.typography.fontFamily.monaco || theme.typography.fontFamily.monospace,
 };

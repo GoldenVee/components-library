@@ -1,24 +1,66 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw, { TwStyle } from 'twin.macro';
+import tw from 'twin.macro';
 import { ThemeProps, styledThemeProps } from '../../themes';
-import { ButtonProps, FullButtonProps } from './Button.props';
+import {
+  BorderProps,
+  ButtonProps,
+  FullButtonProps,
+  PaddingSizeProps,
+  StyledButtonProps,
+} from './Button.props';
 import { ActivityIndicator } from '../ActivityIndicator/ActivityIndicator';
 
-export const StyledButton = styled.button<ButtonProps>(
-  ({ variant, fullWidth, disabled, theme }) => [
-    ({ variant = 'primary' }) => Variants[variant],
-    ({ size = 'medium' }) => Sizes[size],
-    ({ border = 'none' }) => Border[border],
-    ({ borderRadius = 'medium' }) => BorderRadius[borderRadius],
-    ({ boxShadow = 'small' }) => BoxShadow[boxShadow],
-    fullWidth && tw`flex w-full justify-center`,
-    disabled && theme.colors.disabled,
-    disabled &&
-      variant === 'transparent' &&
-      tw`disabled:opacity-75 bg-slate-200`,
-    tw`flex flex-row justify-center items-center`,
-  ],
+const prefersReducedMotion =
+  typeof window !== 'undefined' &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export const StyledButton = styled.button<StyledButtonProps>(
+  ({
+    variant = 'primary',
+    size = 'base',
+    border = 'sm',
+    borderRadius = 'base',
+    boxShadow = 'sm',
+    fullWidth,
+    disabled,
+    theme,
+  }) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    background: backgroundColors[variant]({ theme }),
+    color: fontColors[variant]({ theme }),
+    fontSize: fontSize[size]({ theme }),
+    lineHeight: fontLH[size]({ theme }),
+    padding: paddingSize[size],
+    margin: '8px',
+    borderStyle: 'solid',
+    borderColor: borderColor[variant]({ theme }),
+    borderWidth: borderSize[border],
+    borderRadius: radiusSize[borderRadius]({ theme }),
+    boxShadow: boxshadow[boxShadow]({ theme }),
+    transition: prefersReducedMotion ? 'none' : 'all 0.2s ease-in-out',
+    width: fullWidth ? '100%' : 'fit-content',
+    maxWidth: fullWidth ? '100%' : '320px',
+    height: 'fit-content',
+    justifyContent: 'center',
+    cursor: disabled ? 'not-allowed' : 'pointer',
+    '&:not(:disabled):hover': {
+      background: hoverColors[variant]({ theme }),
+      color: fontHoverColors[variant]({ theme }),
+    },
+    '&:disabled': {
+      opacity: '80% ',
+      color:
+        variant === 'transparent'
+          ? '#667696'
+          : backgroundColors[variant] || theme.colors.tertiary,
+    },
+    '&:focus': {
+      border: '3px solid rgba(99, 102, 241, 0.8)',
+    },
+  }),
 );
 
 export const LabelContainer = styled.div<ButtonProps>(({ mediaSrc }) => [
@@ -59,7 +101,7 @@ export const StyledIndicator = ({
   };
 
   return (
-    <span style={{ display: 'flex' }}>
+    <span style={{ display: 'flex', alignSelf: 'center' }}>
       <ActivityIndicator
         loading
         size={IndicatorSizes[size]}
@@ -73,16 +115,7 @@ export const StyledIndicator = ({
   );
 };
 
-const Sizes: TwStyle = {
-  xs: tw`px-2 py-1.5 m-2 text-xs h-min w-fit`,
-  sm: tw`px-2.5 py-1.5 m-2 text-sm h-min w-fit`,
-  base: tw`px-3.5 py-2 m-2 text-sm h-min w-fit`,
-  ml: tw`px-4 py-3 m-2 text-sm h-min w-fit`,
-  lg: tw`px-5 py-3.5 m-2 text-sm h-min w-fit`,
-  xl: tw`px-6 py-4 m-2 text-base h-min w-fit`,
-};
-
-const Variants: styledThemeProps = {
+const backgroundColors: any = {
   primary: ({ theme }: { theme: ThemeProps }) => theme.colors.primary,
   secondary: ({ theme }: { theme: ThemeProps }) => theme.colors.secondary,
   tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.tertiary,
@@ -93,23 +126,107 @@ const Variants: styledThemeProps = {
   gradient: ({ theme }: { theme: ThemeProps }) => theme.colors.gradient,
 };
 
-const Border: styledThemeProps = {
-  none: ({ theme }: { theme: ThemeProps }) => theme.border.noBorder,
-  small: ({ theme }: { theme: ThemeProps }) => theme.border.small,
-  medium: ({ theme }: { theme: ThemeProps }) => theme.border.medium,
+const hoverColors: any = {
+  primary: ({ theme }: { theme: ThemeProps }) => theme.colors.primeAccent,
+  secondary: ({ theme }: { theme: ThemeProps }) => theme.colors.secondAccent,
+  tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.tertAccent,
+  quaternary: ({ theme }: { theme: ThemeProps }) => theme.colors.quatAccent,
+  transparent: ({ theme }: { theme: ThemeProps }) => theme.colors.trAccent,
+  destroy: ({ theme }: { theme: ThemeProps }) => theme.colors.dstrAccent,
+  confirm: ({ theme }: { theme: ThemeProps }) => theme.colors.cfmAccent,
+  gradient: ({ theme }: { theme: ThemeProps }) => theme.colors.gradAccent,
 };
 
-const BorderRadius: styledThemeProps = {
+const fontSize: styledThemeProps = {
+  xs: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.xs,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.sm,
+  base: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.base,
+  ml: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.ml,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lg,
+  xl: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.xl,
+};
+const fontLH: styledThemeProps = {
+  xs: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lineHeight.xs,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lineHeight.sm,
+  base: ({ theme }: { theme: ThemeProps }) =>
+    theme.typography.btn.lineHeight.base,
+  ml: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lineHeight.ml,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lineHeight.lg,
+  xl: ({ theme }: { theme: ThemeProps }) => theme.typography.btn.lineHeight.xl,
+};
+
+const fontColors: styledThemeProps = {
+  primary: ({ theme }: { theme: ThemeProps }) => theme.colors.font.btn.primary,
+  secondary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.secondary,
+  tertiary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.tertiary,
+  quaternary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.quaternary,
+  transparent: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.transparent,
+  destroy: ({ theme }: { theme: ThemeProps }) => theme.colors.font.btn.destroy,
+  confirm: ({ theme }: { theme: ThemeProps }) => theme.colors.font.btn.confirm,
+  gradient: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.gradient,
+};
+const fontHoverColors: any = {
+  primary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.primeAccent,
+  secondary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.secondAccent,
+  tertiary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.tertAccent,
+  quaternary: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.quatAccent,
+  transparent: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.trAccent,
+  destroy: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.dstrAccent,
+  confirm: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.cfmAccent,
+  gradient: ({ theme }: { theme: ThemeProps }) =>
+    theme.colors.font.btn.gradAccent,
+};
+
+const paddingSize: PaddingSizeProps = {
+  xs: '6px 8px',
+  sm: '6px 10px',
+  base: '8px 14px',
+  ml: '10px 16px',
+  lg: '14px 20px',
+  xl: '14px 20px',
+};
+
+const borderSize: BorderProps = {
+  none: 'none',
+  sm: '1px',
+  base: '2px',
+  lg: '3px',
+};
+
+const borderColor: styledThemeProps = {
+  primary: ({ theme }: { theme: ThemeProps }) => theme.colors.primeAccent,
+  secondary: ({ theme }: { theme: ThemeProps }) => theme.colors.secondAccent,
+  tertiary: ({ theme }: { theme: ThemeProps }) => theme.colors.tertAccent,
+  quaternary: ({ theme }: { theme: ThemeProps }) => theme.colors.quatAccent,
+  transparent: ({ theme }: { theme: ThemeProps }) => theme.colors.trAccent,
+  destroy: ({ theme }: { theme: ThemeProps }) => theme.colors.dstrAccent,
+  confirm: ({ theme }: { theme: ThemeProps }) => theme.colors.cfmAccent,
+  gradient: ({ theme }: { theme: ThemeProps }) => theme.colors.primeAccent,
+};
+
+const radiusSize: styledThemeProps = {
   none: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.none,
-  small: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.small,
-  medium: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.medium,
-  large: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.large,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.sm,
+  base: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.base,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.lg,
   round: ({ theme }: { theme: ThemeProps }) => theme.borderRadius.round,
 };
 
-const BoxShadow: styledThemeProps = {
+const boxshadow: styledThemeProps = {
   none: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.none,
-  small: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.small,
-  large: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.large,
+  sm: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.sm,
+  lg: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.lg,
   inset: ({ theme }: { theme: ThemeProps }) => theme.boxShadow.inset,
 };

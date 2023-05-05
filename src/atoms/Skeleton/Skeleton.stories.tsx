@@ -12,6 +12,7 @@ const meta: Meta = {
   argTypes: {
     count: {
       description: 'Determines how many lines are in the Skeleton skeleton.',
+      table: { defaultValue: { summary: '1' } },
       control: {
         type: 'number',
       },
@@ -19,30 +20,35 @@ const meta: Meta = {
     width: {
       description:
         'Width of the lines in the Skeleton skeleton. If not specified, will get its width from the content its replacing.',
+      table: { defaultValue: { summary: '150' } },
       control: {
         type: 'number',
       },
     },
     height: {
       description: 'Height of the lines in the Skeleton skeleton.',
+      table: { defaultValue: { summary: 'font size' } },
       control: {
         type: 'number',
       },
     },
     borderRadius: {
       description: 'The border radius of the Skeleton skeleton.',
+      table: { defaultValue: { summary: '0.25rem' } },
       control: {
         type: 'number',
       },
     },
     circle: {
       description: 'Turns the Skeleton skeleton into a circle.',
+      table: { defaultValue: { summary: 'false' } },
       control: {
         type: 'boolean',
       },
     },
     baseColor: {
       description: 'Choose a custom color for the Skeleton skeleton.',
+      table: { defaultValue: { summary: '#94a3b8' } },
       control: {
         type: 'color',
       },
@@ -50,6 +56,7 @@ const meta: Meta = {
     highlightColor: {
       description:
         'Choose a custom color for highlight used in the animation for the Skeleton skeleton.',
+      table: { defaultValue: { summary: '#cbd5e1' } },
       control: {
         type: 'color',
       },
@@ -57,25 +64,22 @@ const meta: Meta = {
     inline: {
       description:
         'The default behavior includes a <br> between lines. Toggle inline false to remove line breaks.',
+      table: { defaultValue: { summary: 'false' } },
       control: {
         type: 'boolean',
       },
     },
     duration: {
       description: 'Determines the length of animation measured in seconds.',
+      table: { defaultValue: { summary: '1.5' } },
       control: {
         type: 'number',
-      },
-    },
-    direction: {
-      description: 'Provides rtl support. Defaults to ltr.',
-      control: {
-        type: 'text',
       },
     },
     enableAnimation: {
       description:
         'Toggles highlight animation. If prefers-reduced-motion detected, this toggles false.',
+      table: { defaultValue: { summary: 'true' } },
       control: {
         type: 'boolean',
       },
@@ -161,3 +165,20 @@ Default.args = { count: 3, width: 300 };
 
 export const Example = ExampleTemplate.bind({});
 Example.args = {};
+Example.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'count',
+      'width',
+      'height',
+      'borderRadius',
+      'circle',
+      'role',
+      'inline',
+      'enableAnimation',
+      'duration',
+      'direction',
+    ],
+  },
+};

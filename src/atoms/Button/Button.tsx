@@ -23,11 +23,11 @@ const MediaButton = ({
 
 export const Button = ({
   name,
-  size = 'base',
-  variant = 'primary',
-  border = 'sm',
-  borderRadius = 'md',
-  boxShadow = 'sm',
+  size,
+  variant,
+  border,
+  borderRadius,
+  boxShadow,
   fullWidth = false,
   iconPosition,
   mediaSrc = undefined,
@@ -35,11 +35,13 @@ export const Button = ({
   isLoading = false,
   disabled = false,
   children,
+  onClick,
   ...props
 }: FullButtonProps): JSX.Element => {
   const showIcon = isLoading || !!mediaSrc;
 
-  if (children) return <button>{children}</button>;
+  if (children)
+    return <button onClick={disabled ? undefined : onClick}>{children}</button>;
   return (
     <StyledButton
       size={size}
@@ -49,6 +51,7 @@ export const Button = ({
       boxShadow={boxShadow}
       fullWidth={fullWidth}
       disabled={disabled}
+      onClick={disabled ? undefined : onClick}
       {...props}
       aria-label={disabled ? `${name} disabled` : name}
       role="button"

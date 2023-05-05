@@ -19,6 +19,7 @@ const meta: Meta = {
     altText: {
       description:
         'Alt text description for accessibility. If the image is decorative, leave the alt text blank.',
+      table: { defaultValue: { summary: 'placeholder image' } },
       control: {
         type: 'text',
       },
@@ -26,6 +27,7 @@ const meta: Meta = {
     width: {
       description:
         'Determine the size of the image via width. Default values are auto, icon, xs, small, medium, mlg, large, xl, and full. But can accept any image size.',
+      table: { defaultValue: { summary: 'ml' } },
       control: {
         type: 'text',
       },
@@ -85,3 +87,8 @@ Default.args = {
 };
 export const Examples = ExampleTemplate.bind({});
 Examples.args = {};
+Examples.parameters = {
+  controls: {
+    exclude: ['mediaSrc', 'altText', 'width'],
+  },
+};

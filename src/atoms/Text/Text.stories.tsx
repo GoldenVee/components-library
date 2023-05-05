@@ -18,6 +18,7 @@ const meta: Meta = {
     family: {
       description:
         'Determines the font family. Can default to simply sans-serif, serif, or monospace, which defaults to Tailwind system fonts, or specify one of the below families.',
+      table: { defaultValue: { summary: 'georgia' } },
       control: {
         type: 'radio',
         options: [
@@ -28,13 +29,14 @@ const meta: Meta = {
           'roboto',
           'courierNew',
           'menlo',
-          'monoco',
+          'monaco',
         ],
       },
     },
     role: {
       description:
         'Options for what tag will be used semantically and the main function of the text. Each tag has a default styling that can be overwritten.',
+      table: { defaultValue: { summary: 'p' } },
       control: {
         type: 'radio',
         options: [
@@ -53,13 +55,15 @@ const meta: Meta = {
     },
     size: {
       description: 'Determines the font size and line height.',
+      table: { defaultValue: { summary: 'base' } },
       control: {
         type: 'radio',
-        options: ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
+        options: ['xs', 'sm', 'base', 'lg', 'xl', 'xxl', 'xxxl', 'ivxl', 'vxl'],
       },
     },
     weight: {
       description: 'Sets text weight.',
+      table: { defaultValue: { summary: 'base' } },
       control: {
         type: 'radio',
         options: ['light', 'base', 'md', 'semibold', 'bold'],
@@ -67,13 +71,26 @@ const meta: Meta = {
     },
     color: {
       description:
-        'Sets font color. Default values based on the theme are contrast, base, subtle, nonessential, and interactive. You can also add custom rgba color values. Opacity is bundled in with color.',
+        'Sets font color. Default values based on the theme. Options are primary, secondary, tertiary, contrast, interactive, primaryHead, secondaryHead, tertiaryHead, quaternaryHead, You can also add custom rgba color values. Opacity is bundled in with color.',
+      table: { defaultValue: { summary: 'primary' } },
       control: {
-        type: 'text',
+        type: 'radio',
+        options: [
+          'primary',
+          'secondary',
+          'tertiary',
+          'contrast',
+          'interactive',
+          'primaryHead',
+          'secondaryHead',
+          'tertiaryHead',
+          'quaternaryHead',
+        ],
       },
     },
     allCaps: {
       description: 'Transform text to all capitalized.',
+      table: { defaultValue: { summary: 'false' } },
       control: {
         type: 'boolean',
       },
@@ -81,6 +98,7 @@ const meta: Meta = {
     stylize: {
       description:
         'Stylize text into italics, strike through, or underlined. Certain tags have default styling.',
+      table: { defaultValue: { summary: 'none' } },
       control: {
         type: 'radio',
         options: ['none', 'italic', 'strike', 'underline'],
@@ -88,6 +106,7 @@ const meta: Meta = {
     },
     align: {
       description: 'Determines text alignment.',
+      table: { defaultValue: { summary: 'left' } },
       control: {
         type: 'radio',
         options: ['left', 'right', 'center'],
@@ -95,17 +114,10 @@ const meta: Meta = {
     },
     overflow: {
       description: 'Decides how to handle words larger than their container.',
+      table: { defaultValue: { summary: 'break' } },
       control: {
         type: 'radio',
-        options: ['truncate', 'break', 'hyphen'],
-      },
-    },
-    indent: {
-      description:
-        'Add an indent to the text block. List items have a default indent.',
-      control: {
-        type: 'radio',
-        options: ['none', 'sm', 'md', 'lg'],
+        options: ['break', 'hyphen'],
       },
     },
   },
@@ -120,8 +132,8 @@ const ExampleContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: fit-content;
   width: 100%;
+  padding: 20px;
   max-width: 1000px;
 `;
 
@@ -143,16 +155,16 @@ const SizesTemplate: Story<TextProps> = (args) => {
         justifyContent: 'space-between',
       }}
     >
-      <Text size="5xl" {...args}>
+      <Text size="vxl" {...args}>
         Lorem ipsum dolor sit amet
       </Text>
-      <Text size="4xl" {...args}>
+      <Text size="ivxl" {...args}>
         Lorem ipsum dolor sit amet
       </Text>
-      <Text size="3xl" {...args}>
+      <Text size="xxxl" {...args}>
         Lorem ipsum dolor sit amet
       </Text>
-      <Text size="2xl" {...args}>
+      <Text size="xxl" {...args}>
         Lorem ipsum dolor sit amet
       </Text>
       <Text size="xl" {...args}>
@@ -196,22 +208,38 @@ const WeightsTemplate: Story<TextProps> = (args) => {
 const ColorsTemplate: Story<TextProps> = (args) => {
   return (
     <ExampleContainer>
-      <Text color={'contrast'} {...args}>
-        This is a contrast text example.
+      <Text role="h1" color={'primaryHead'} {...args}>
+        This is a primaryHead text example.
       </Text>
-      <Text color={'base'} {...args}>
-        This is a base text example.
+      <Text role="h2" color={'secondaryHead'} {...args}>
+        This is a secondaryHead text example.
       </Text>
-      <Text color={'subtle'} {...args}>
-        This is a subtle text example.
+      <Text role="h3" color={'tertiaryHead'} {...args}>
+        This is a tertiaryHead text example.
       </Text>
-      <Text color={'nonessential'} {...args}>
-        This is a nonessential text example.
+      <Text role="h4" color={'quaternaryHead'} {...args}>
+        This is a quaternaryHead text example.
+      </Text>
+      <div
+        style={{ background: '#596C87', padding: '12px', borderRadius: '6px' }}
+      >
+        <Text color={'contrast'} {...args}>
+          This is a contrast text example.
+        </Text>
+      </div>
+      <Text color={'primary'} {...args}>
+        This is a primary text example.
+      </Text>
+      <Text color={'secondary'} {...args}>
+        This is a secondary text example.
+      </Text>
+      <Text color={'tertiary'} {...args}>
+        This is a tertiary text example.
       </Text>
       <Text color={'interactive'} {...args}>
         This is a interactive text example.
       </Text>
-      <Text color={'#119c59'} {...args}>
+      <Text color={'#17A560'} {...args}>
         This is a custom text example.
       </Text>
     </ExampleContainer>
@@ -241,21 +269,10 @@ const OverflowTemplate: Story<TextProps> = (args) => {
   return (
     <ExampleContainer>
       <div style={{ marginTop: '16px', width: '46vw' }}>
-        <Text color="contrast" role="h2" size="base" weight="semibold">
-          Truncate:
-        </Text>
-        <Text color="subtle" overflow="truncate" {...args}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Utenimadminimveniam,quisnostrudexercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
-      </div>
-      <div style={{ marginTop: '16px', width: '46vw' }}>
-        <Text color="contrast" role="h2" size="base" weight="semibold">
+        <Text color="secondaryHead" role="h2" size="base" weight="semibold">
           Break:
         </Text>
-        <Text color="subtle" overflow="break" {...args}>
+        <Text color="secondary" overflow="break" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Utenimadminimveniam,quisnostrudexercitationullamcolaborisnisiut
@@ -266,10 +283,10 @@ const OverflowTemplate: Story<TextProps> = (args) => {
         </Text>
       </div>
       <div style={{ marginTop: '16px', width: '46vw' }}>
-        <Text color="contrast" role="h2" size="base" weight="semibold">
+        <Text color="secondaryHead" role="h2" size="base" weight="semibold">
           Hyphen:
         </Text>
-        <Text color="subtle" overflow="hyphen" {...args}>
+        <Text color="secondary" overflow="hyphen" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Utenimadminimveniam,quisnostrudexercitationullamcolaborisnisiut
@@ -287,7 +304,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
     <ExampleContainer>
       <div style={{ marginTop: '24px' }}>
         <Text
-          color="contrast"
+          color="secondaryHead"
           role="h2"
           size="base"
           weight="semibold"
@@ -295,7 +312,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Left:
         </Text>
-        <Text color="subtle" align="left" {...args}>
+        <Text color="secondary" align="left" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -307,7 +324,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
       </div>
       <div style={{ marginTop: '56px' }}>
         <Text
-          color="contrast"
+          color="secondaryHead"
           role="h2"
           size="base"
           weight="semibold"
@@ -315,7 +332,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Center:
         </Text>
-        <Text color="subtle" align="center" {...args}>
+        <Text color="secondary" align="center" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -327,7 +344,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
       </div>
       <div style={{ marginTop: '56px' }}>
         <Text
-          color="contrast"
+          color="secondaryHead"
           role="h2"
           size="base"
           weight="semibold"
@@ -335,7 +352,7 @@ const AlignmentTemplate: Story<TextProps> = (args) => {
         >
           Align Right:
         </Text>
-        <Text color="subtle" align="right" {...args}>
+        <Text color="secondary" align="right" {...args}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -368,15 +385,15 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
         weight="base"
         stylize="italic"
         size="xl"
-        color="nonessential"
+        color="tertiary"
         {...args}
       >
         Amet cursus sit amet dictum.
       </Text>
-      <Text role="h1" style={{ margin: '4px 0px 32px 0px' }} {...args}>
+      <Text role="h1" style={{ margin: '0px 0px 32px 0px' }} {...args}>
         Lorem ipsum dolor sit amet
       </Text>
-      <Text role="p" color="subtle" {...args}>
+      <Text role="p" color="secondary" {...args}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -388,8 +405,8 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
       <Text
         size="sm"
         family="subtext"
-        color="nonessential"
-        style={{ margin: '16px' }}
+        color="tertiary"
+        style={{ margin: '8px' }}
         {...args}
       >
         *Mauris in aliquam sem fringilla ut
@@ -397,7 +414,7 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
       <Text role="h2" style={{ margin: '32px 0px 16px 0px' }} {...args}>
         Excepteur sint occaecat
       </Text>
-      <Text role="p" color="subtle" {...args}>
+      <Text role="p" color="secondary" {...args}>
         Augue lacus viverra vitae congue eu consequat ac. Neque convallis a cras
         semper auctor neque. Vivamus arcu felis bibendum ut tristique et egestas
         quis ipsum. Interdum consectetur libero id faucibus nisl tincidunt eget
@@ -405,11 +422,11 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
         ac. Tortor consequat id porta nibh venenatis cras sed felis. Velit
         dignissim sodales ut eu sem integer vitae.
       </Text>
-      <Text role="blockquote" style={{ margin: '32px 8px' }} {...args}>
+      <Text role="blockquote" style={{ margin: '6px 8px 24px 16px' }} {...args}>
         &quot;Commodo elit at imperdiet dui accumsan sit amet.&ldquo; - Smart
         Person
       </Text>
-      <Text role="p" color="subtle" {...args}>
+      <Text role="p" color="secondary" {...args}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -418,7 +435,7 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
       <Text role="h3" style={{ margin: '48px 0px 16px 0px' }}>
         Magna fermentum iaculis eu non diam phasellus?
       </Text>
-      <Text role="p" color="subtle" {...args}>
+      <Text role="p" color="secondary" {...args}>
         Sit amet justo donec enim diam vulputate. Elementum curabitur vitae nunc
         sed velit dignissim sodales ut. Justo eget magna fermentum iaculis eu
         non.
@@ -430,37 +447,27 @@ const FontFamExampleTemplate: Story<TextProps> = (args) => {
 const ListTemplate: Story<TextProps> = (args) => {
   return (
     <ExampleContainer>
-      <Text
-        role="ul"
-        color="contrast"
-        style={{ margin: '0px 0px 32px 0px' }}
-        {...args}
-      >
+      <Text role="ul" style={{ margin: '0px 0px 32px 0px' }} {...args}>
         List Title
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
       </Text>
-      <Text
-        role="ol"
-        color="contrast"
-        style={{ margin: '32px 0px 24px 0px' }}
-        {...args}
-      >
+      <Text role="ol" style={{ margin: '32px 0px 24px 0px' }} {...args}>
         List Title
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
-        <Text role="li" color="subtle" {...args}>
+        <Text role="li" {...args}>
           Lorem ipsum dolor sit amet
         </Text>
       </Text>
@@ -475,27 +482,161 @@ Default.args = {};
 
 export const Sizes = SizesTemplate.bind({});
 Sizes.args = {};
+Sizes.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const Weights = WeightsTemplate.bind({});
 Weights.args = { family: 'helveticaNeue' };
+Weights.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const Colors = ColorsTemplate.bind({});
 Colors.args = { align: 'left' };
+Colors.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'family',
+      'children',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const Stylize = StylizeTemplate.bind({});
 Stylize.args = { align: 'left' };
+Stylize.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const Overflow = OverflowTemplate.bind({});
 Overflow.args = {};
+Overflow.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const Alignment = AlignmentTemplate.bind({});
-Overflow.args = {};
+Alignment.args = {};
+Alignment.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const AllCaps = AllCapsTemplate.bind({});
-Overflow.args = {};
+AllCaps.args = {};
+AllCaps.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'role',
+      'align',
+    ],
+  },
+};
 
 export const FontFamExample = FontFamExampleTemplate.bind({});
 FontFamExample.args = {};
+FontFamExample.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+      'children',
+    ],
+  },
+};
 
 export const List = ListTemplate.bind({});
 List.args = {};
+List.parameters = {
+  controls: {
+    exclude: [
+      'size',
+      'color',
+      'family',
+      'weight',
+      'stylize',
+      'overflow',
+      'allCaps',
+      'role',
+      'align',
+      'children',
+    ],
+  },
+};
